@@ -23,6 +23,7 @@ For start installation please visit Wiki page
 
 ## What is next?
 - Social login with [Laravel Socialite](https://github.com/laravel/socialite)
+- Enviroments for Postman Collection
 
 ## Contributing
 

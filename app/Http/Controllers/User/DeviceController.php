@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 
 class DeviceController extends Controller
 {
-
     /**
-     * Store new device
+     * Store new device.
+     *
      * @param Request $request
      */
     public function store(Request $request)
     {
-
         $request->user()->device()->create(
             $request->all()
         );
 
-	return $this->response->noContent();
+        return $this->response->noContent();
     }
 
     /**
-     * List of users devices
+     * List of users devices.
+     *
      * @return array
      */
     public function index(Request $request)
@@ -35,17 +35,18 @@ class DeviceController extends Controller
     }
 
     /**
-     * Get users device details
+     * Get users device details.
+     *
      * @param Request $request
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function show(Request $request, $id)
     {
         $device = $request->user()->device()->where('id', $id)->first();
 
-        if(!isset($device->id))
-        {
+        if (!isset($device->id)) {
             return $this->response->errorNotFound(trans('exception.device_not_found'));
         }
 
@@ -55,22 +56,22 @@ class DeviceController extends Controller
     }
 
     /**
-     * Remove device
+     * Remove device.
+     *
      * @param Request $request
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response|void
      */
     public function destroy(Request $request, $id)
     {
         $device = $request->user()->device()->where('id', $id)->first();
-        if(isset($device->id))
-        {
+        if (isset($device->id)) {
             $device->delete();
+
             return $this->response->noContent();
         }
 
         return $this->response->errorNotFound(trans('exception.device_not_found'));
-
     }
-
 }

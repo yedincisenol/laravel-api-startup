@@ -8,8 +8,7 @@ class UserDeviceTransformer extends Transformer
 {
     public function transform(UserDevice $device)
     {
-        if(!is_null($device))
-        {
+        if (!is_null($device)) {
             return [
                 'id'            => $device->id,
                 'device_id'     => $device->device_id,

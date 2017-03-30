@@ -110,7 +110,7 @@ return [
     |
     */
 
-    'attributes' => [],
-    'validation_failed' => 'Validation failed'
+    'attributes'        => [],
+    'validation_failed' => 'Validation failed',
 
 ];

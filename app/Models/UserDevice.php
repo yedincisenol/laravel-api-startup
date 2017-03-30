@@ -5,7 +5,7 @@ namespace App\Models;
 class UserDevice extends Model
 {
     /**
-     * Table name
+     * Table name.
      *
      * @var string
      */
@@ -30,7 +30,7 @@ class UserDevice extends Model
     ];
 
     /**
-     * Get users of device
+     * Get users of device.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */

@@ -1,3 +1,4 @@
+![Coverage Status](https://styleci.io/repos/84556737/shield)
 ## Laravel Api Startup
 
 "Laravel api startup" is a Laravel project for start build an Api quickly! 

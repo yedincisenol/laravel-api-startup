@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Validator;
-use App\Services\Filter;
 use App\Exceptions\ValidationException;
+use App\Services\Filter;
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Validator;
 
 abstract class Model extends BaseModel
 {
-
-
     /**
      * The storage format of the model's date columns.
      *
@@ -47,23 +45,24 @@ abstract class Model extends BaseModel
     /**
      * Set a given attribute on the model.
      *
-     * @param  string  $key
-     * @param  mixed   $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return $this
      */
     public function setAttribute($key, $value)
     {
         // empty string instead of null.
         if (is_array($value)) {
-            array_walk_recursive($value, function (& $attribute) {
-                if (! is_bool($attribute)) {
+            array_walk_recursive($value, function (&$attribute) {
+                if (!is_bool($attribute)) {
                     $attribute = trim($attribute);
                 }
 
                 $attribute = $attribute === '' ? null : $attribute;
             });
         } else {
-            if (! is_bool($value)) {
+            if (!is_bool($value)) {
                 $value = trim($value);
             }
         }
@@ -94,14 +93,15 @@ abstract class Model extends BaseModel
     /**
      * Retrive rules before replace the :id.
      *
-     * @param  array  $rules
+     * @param array $rules
+     *
      * @return array
      */
     public function parseRules(array $rules = [])
     {
         $rules = $rules ?: $this->rules;
 
-        foreach ($rules as & $rule) {
+        foreach ($rules as &$rule) {
             if (is_array($rule)) {
                 return $this->parseRules($rule);
             }
@@ -117,8 +117,9 @@ abstract class Model extends BaseModel
     /**
      * Trigger the query builder scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $queryString
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $queryString
+     *
      * @return void
      */
     public function scopeFilter($query, $queryString = null)

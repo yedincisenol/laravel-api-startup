@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +15,16 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1.0', [
-        'middleware' => ['api.throttle','client'],
-        'limit' => 200,
-        'expires' => 5,
+        'middleware' => ['api.throttle', 'client'],
+        'limit'      => 200,
+        'expires'    => 5,
         'namespace'  => 'App\Http\Controllers',
-        'prefix' => 'v1.0'
+        'prefix'     => 'v1.0',
     ], function ($api) {
-
         $api->group(['middleware' => ['auth:api', 'scope:manage-devices'],
-            'prefix' => 'self', 'namespace'=> 'User'], function($api){
+            'prefix'              => 'self', 'namespace'=> 'User', ], function ($api) {
                 $api->resource('device', 'DeviceController');
             });
 
         $api->post('register', 'Controller@register');
-
-});
+    });

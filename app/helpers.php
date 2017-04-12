@@ -1,34 +1,16 @@
 <?php
 
-use LaravelFCM\Facades\FCM;
-use LaravelFCM\Message\OptionsBuilder;
-use LaravelFCM\Message\PayloadDataBuilder;
-use LaravelFCM\Message\PayloadNotificationBuilder;
-
 /**
- * Send notificaton
  * @param $deviceIds
- * @param $ttl
  * @param $title
  * @param $body
  * @param $data
+ * @param int $ttl
  */
-function notification($deviceIds, $ttl, $title, $body, $data) {
+function notification($deviceIds, $title, $body, $data, $ttl = 259200) {
 
-    $notificationBuilder = new PayloadNotificationBuilder();
-    $notificationBuilder->setTitle($title)
-        ->setBody($body);
-
-    $notification = $notificationBuilder->build();
-
-    $optionBuiler = new OptionsBuilder();
-    $optionBuiler->setTimeToLive($ttl);
-    $option = $optionBuiler->build();
-
-    $dataBuilder = new PayloadDataBuilder();
-    $dataBuilder->addData($data);
-    $data = $dataBuilder->build();
-
-    FCM::sendTo($deviceIds, $option, $notification, $data);
+    OneSignal::sendNotificationCustom(
+        ['include_player_ids' => $deviceIds, 'contents' => $body, 'data' => $data,
+            'headings' => $title, 'ttl' => $ttl]);
 
 }

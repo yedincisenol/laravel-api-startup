@@ -12,6 +12,7 @@ class DeviceController extends Controller
     /**
      * Store new device
      * @param Request $request
+     * @return \Dingo\Api\Http\Response
      */
     public function store(Request $request)
     {
@@ -20,15 +21,17 @@ class DeviceController extends Controller
             $request->all()
         );
 
-	return $this->response->noContent();
+	    return $this->response->created();
     }
 
     /**
      * List of users devices
-     * @return array
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
      */
     public function index(Request $request)
     {
+
         return $this->response->paginator(
             $request->user()->device()->paginate(10), new UserDeviceTransformer()
         );
@@ -38,7 +41,7 @@ class DeviceController extends Controller
      * Get users device details
      * @param Request $request
      * @param $id
-     * @return \Dingo\Api\Http\Response
+     * @return \Dingo\Api\Http\Response|void
      */
     public function show(Request $request, $id)
     {
@@ -62,7 +65,7 @@ class DeviceController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $device = $request->user()->device()->where('id', $id)->first();
+        $device = $request->user()->device()->where('device_id', $id)->first();
         if(isset($device->id))
         {
             $device->delete();

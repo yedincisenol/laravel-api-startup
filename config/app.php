@@ -177,9 +177,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-	Dingo\Api\Provider\LaravelServiceProvider::class,
-	Laravel\Passport\PassportServiceProvider::class,
-        LaravelFCM\FCMServiceProvider::class,
+	    Dingo\Api\Provider\LaravelServiceProvider::class,
+	    Laravel\Passport\PassportServiceProvider::class,
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
     ],
 
     /*
@@ -226,9 +226,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'FCM'      => LaravelFCM\Facades\FCM::class,
-        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
-
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class
     ],
 
 ];

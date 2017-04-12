@@ -11,8 +11,7 @@
         "laravel/tinker": "~1.0",
         "league/oauth2-server": "^5.1",
         "laravel/passport": "v1.0.17",
-        "brozot/laravel-fcm": "^1.2"
-
+        "berkayk/onesignal-laravel": "^0.9.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -10,7 +10,7 @@
 - Api response transformers, related models for customize endpoint response with [Dingo Api](https://github.com/dingo/api)
 - Rate limiting with [Dingo Api](https://github.com/dingo/api)
 - Response transformers with [Dingo Api](https://github.com/dingo/api)
-- Notification send with [Laravel FCM](https://github.com/brozot/Laravel-FCM)
+- Notification send with [Onesignal](https://github.com/berkayk/laravel-onesignal)
 - Ready user device endpoints for notification to users via devices
 - Ready api versions
 - Ready postman collection for Frontend Developer
@@ -23,6 +23,7 @@ For start installation please visit Wiki page
 
 ## What is next?
 - Social login with [Laravel Socialite](https://github.com/laravel/socialite)
+- Available includes in response meta
 
 ## Contributing
 

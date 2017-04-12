@@ -16,7 +16,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Helpers;
 
-
     public function register(Request $request)
     {
 
@@ -30,11 +29,12 @@ class Controller extends BaseController
             throw new ValidationException($valid->errors());
         }
 
-
         User::create([
             'name' => $request->get('name'),
             'email'=> $request->get('email'),
             'password' => bcrypt($request->get('password'))
         ]);
+
+        return $this->response->created();
     }
 }

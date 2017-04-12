@@ -6,6 +6,9 @@ use App\Models\UserDevice;
 
 class UserDeviceTransformer extends Transformer
 {
+
+    public $availableIncludes = ['test'];
+
     public function transform(UserDevice $device)
     {
         if(!is_null($device))

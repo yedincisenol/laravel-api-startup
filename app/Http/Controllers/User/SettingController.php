@@ -12,7 +12,7 @@ class SettingController extends Controller
 
     public function __construct()
     {
-        $this->availableSettings = explode(",", config("project.available_settings"));
+        $this->availableSettings = explode(',', config('project.available_settings'));
     }
 
     /**
@@ -24,14 +24,14 @@ class SettingController extends Controller
      */
     public function storeOrUpdate(Request $request)
     {
-        Setting::setExtraColumns(array(
-            'user_id' => $request->user()->id
-        ));
+        Setting::setExtraColumns([
+            'user_id' => $request->user()->id,
+        ]);
 
         $settings = $request->only($this->availableSettings);
 
         foreach ($settings as $key => $value) {
-            if($value) {
+            if ($value) {
                 Setting::set($key, $value);
             }
         }
@@ -50,13 +50,12 @@ class SettingController extends Controller
      */
     public function index(Request $request)
     {
-        Setting::setExtraColumns(array(
-            'user_id' => $request->user()->id
-        ));
+        Setting::setExtraColumns([
+            'user_id' => $request->user()->id,
+        ]);
 
         $response['data'] = Setting::all();
 
         return $this->response->array($response);
     }
-
 }

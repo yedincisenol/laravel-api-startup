@@ -21,10 +21,13 @@ $api->version('v1.0', [
         'namespace'  => 'App\Http\Controllers',
         'prefix'     => 'v1.0',
     ], function ($api) {
-        $api->group(['middleware' => ['auth:api', 'scope:manage-devices'],
-            'prefix'              => 'self', 'namespace'=> 'User', ], function ($api) {
-                $api->resource('device', 'DeviceController');
-            });
+        $api->group(['middleware'   => ['auth:api', 'scope:manage-devices'],
+                     'prefix'       => 'self', 'namespace'=> 'User', ],
+            function ($api) {
+                $api->resource('device', 'DeviceController', ['middleware'   => ['scope:manage-devices']]);
+                $api->get('setting',  'SettingController@index');
+                $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
+        });
 
         $api->post('register', 'Controller@register');
     });

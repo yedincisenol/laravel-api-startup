@@ -180,6 +180,7 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
+        anlutro\LaravelSettings\ServiceProvider::class,
     ],
 
     /*
@@ -227,6 +228,7 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'OneSignal'    => Berkayk\OneSignal\OneSignalFacade::class,
+        'Setting'      => anlutro\LaravelSettings\Facade::class,
     ],
 
 ];

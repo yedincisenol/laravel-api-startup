@@ -25,9 +25,9 @@ $api->version('v1.0', [
                      'prefix'       => 'self', 'namespace'=> 'User', ],
             function ($api) {
                 $api->resource('device', 'DeviceController', ['middleware'   => ['scope:manage-devices']]);
-                $api->get('setting',  'SettingController@index');
+                $api->get('setting', 'SettingController@index');
                 $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
-        });
+            });
 
         $api->post('register', 'Controller@register');
     });

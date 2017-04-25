@@ -18,6 +18,6 @@ return [
     |
     |
     */
-    'rest_api_key'  => 'ONESIGNAL_REST_API_KEY',
-    'user_auth_key' => 'ONESIGNAL_AUTH_API_KEY',
+    'rest_api_key'  => env('ONESIGNAL_REST_API_KEY'),
+    'user_auth_key' => env('ONESIGNAL_AUTH_API_KEY'),
 ];

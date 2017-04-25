@@ -29,5 +29,6 @@ $api->version('v1.0', [
                 $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
             });
 
+        $api->post('login/{provider}', 'Controller@loginWithProvider');
         $api->post('register', 'Controller@register');
     });

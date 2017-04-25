@@ -6,25 +6,26 @@ use App\Services\UserProvider\Exceptions\UserProviderNotFound;
 
 class UserProviderClient
 {
-
     /**
-     * Validate a access token
+     * Validate a access token.
+     *
      * @param $provider
      * @param $accessToken
-     * @return mixed
+     *
      * @throws UserProviderNotFound
+     *
+     * @return mixed
      */
     public static function validate($provider, $accessToken)
     {
-        $providerClass = '\\App\\Services\\UserProvider\\Providers\\' . ucfirst($provider);
+        $providerClass = '\\App\\Services\\UserProvider\\Providers\\'.ucfirst($provider);
 
-        if(! class_exists($providerClass)) {
+        if (!class_exists($providerClass)) {
             throw new UserProviderNotFound();
         }
 
-        $valid   =   $providerClass::validate($accessToken);
+        $valid = $providerClass::validate($accessToken);
 
         return $valid;
     }
-
 }

@@ -20,7 +20,8 @@ class UserServiceProvider extends ServiceProvider
         });
     }
 
-    public function provides() {
+    public function provides()
+    {
         return ['UserProvider'];
     }
 }

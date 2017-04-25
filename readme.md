@@ -24,6 +24,7 @@ For start installation please visit Wiki page
 ## What is next?
 - Social login with [Laravel Socialite](https://github.com/laravel/socialite)
 - Available includes in response meta
+- Localization
 
 ## Contributing
 

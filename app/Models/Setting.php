@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-
     public $timestamps = false;
 
     /**
@@ -22,13 +21,11 @@ class Setting extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'key', 'value', 'user_id'
+        'id', 'key', 'value', 'user_id',
     ];
-
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }

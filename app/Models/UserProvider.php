@@ -26,10 +26,10 @@ class UserProvider extends Model
      */
     protected $rules = [
         'provider'      => 'required|in:facebook,google',
-        'access_token'  =>  'required|string',
-        'refresh_token' =>  'required|string',
-        'expires_at'    =>  'required|date',
-        'user_id'       =>  'required|integer'
+        'access_token'  => 'required|string',
+        'refresh_token' => 'required|string',
+        'expires_at'    => 'required|date',
+        'user_id'       => 'required|integer',
     ];
 
     /**

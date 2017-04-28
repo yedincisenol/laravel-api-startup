@@ -26,6 +26,7 @@ For start installation please visit Wiki page
 - Social login with [Laravel Socialite](https://github.com/laravel/socialite)
 - Available includes in response meta
 - Localization
+- Notification test endpoint
 
 ## Contributing
 

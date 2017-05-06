@@ -27,6 +27,7 @@ For start installation please visit Wiki page
 - Available includes in response meta
 - Localization
 - Notification test endpoint
+- Refactoring with RequestClasses
 
 ## Contributing
 

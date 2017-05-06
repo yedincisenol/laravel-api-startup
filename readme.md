@@ -28,16 +28,13 @@ For start installation please visit Wiki page
 - Localization
 - Notification test endpoint
 - Refactoring with RequestClasses
+- Login with Social media documentation
 
 ## Contributing
 
 - Integrate an new service
 - Open issue any bug on the project
 - Add more document about the project
-
-## Todo 
-
-- Login with Social media documentation
 
 ## Security Vulnerabilities
 

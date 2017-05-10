@@ -30,6 +30,7 @@ For start installation please visit Wiki page
 - Refactoring with RequestClasses
 - Login with Social media documentation
 - Docker file
+- Parameter for Onesignal on Device services
 
 ## Contributing
 

@@ -29,6 +29,7 @@ For start installation please visit Wiki page
 - Notification test endpoint
 - Refactoring with RequestClasses
 - Login with Social media documentation
+- Docker file
 
 ## Contributing
 

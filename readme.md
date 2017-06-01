@@ -32,6 +32,7 @@ For start installation please visit Wiki page
 - Docker file
 - Parameter change for Onesignal on Device services
 - Fix `500` response code to `401` on   `Unauthenticated` state
+- Fix 0 data problem in urlencoded requests for update requests
 
 ## Contributing
 

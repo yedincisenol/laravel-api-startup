@@ -25,7 +25,7 @@ For start installation please visit Wiki page
 ## What is next?
 - Social login documentation
 - Available includes in response meta
-- Localization
+- Localization ( Language and Timezone )
 - Notification test endpoint
 - Refactoring with RequestClasses
 - Login with Social media documentation

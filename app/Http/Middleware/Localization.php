@@ -6,13 +6,12 @@ use Closure;
 use Illuminate\Foundation\Application;
 
 /**
- * Class Localization
+ * Class Localization.
  *
  * @author  Mahmoud Zalt  <mahmoud@zalt.me>
  */
 class Localization
 {
-
     /**
      * Localization constructor.
      *
@@ -26,8 +25,8 @@ class Localization
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @return mixed
      */
@@ -37,7 +36,7 @@ class Localization
         $locale = $request->header('Accept-Language');
 
         // if the header is missed
-        if(!$locale){
+        if (!$locale) {
             // take the default local language
             $locale = $this->app->config->get('app.locale');
         }

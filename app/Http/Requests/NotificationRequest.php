@@ -22,8 +22,8 @@ class NotificationRequest extends Request
     public function rules()
     {
         return [
-            'device_id'                 =>  'required|string',
-            'notification_body'         =>  'required|string'
+            'device_id'                 => 'required|string',
+            'notification_body'         => 'required|string',
         ];
     }
 }

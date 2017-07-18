@@ -81,6 +81,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Supported language list
+    |--------------------------------------------------------------------------
+    |
+    | Application wide accepted and supported language list
+    |
+    */
+
+    'supported_languages' => [
+        'en' => 'English',
+        'tr' => 'Turkish'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |
@@ -179,9 +193,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        App\Services\UserProviderGrant\UserProviderGrantProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
         App\Services\UserProvider\UserServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
     ],
 
     /*

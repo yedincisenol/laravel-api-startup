@@ -19,7 +19,6 @@ $api->version('v1.0', [
         'limit'      => 200,
         'expires'    => 5,
         'namespace'  => 'App\Http\Controllers',
-        'prefix'     => 'v1.0',
     ], function ($api) {
         $api->group(['middleware'   => ['auth:api', 'scope:manage-devices'],
                      'prefix'       => 'self', 'namespace'=> 'User', ],
@@ -29,6 +28,6 @@ $api->version('v1.0', [
                 $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
             });
 
-        $api->post('login/{provider}', 'Controller@loginWithProvider');
         $api->post('register', 'Controller@register');
-    });
+        $api->post('notification', 'NotificationController@send');
+});

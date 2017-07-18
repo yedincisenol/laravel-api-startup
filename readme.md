@@ -23,17 +23,10 @@
 For start installation please visit Wiki page
 
 ## What is next?
-- Social login documentation
-- Available includes in response meta
-- Localization ( Language and Timezone )
-- Notification test endpoint
-- Refactoring with RequestClasses
-- Login with Social media documentation
 - Docker file
 - Parameter change for Onesignal on Device services
 - Fix `500` response code to `401` on   `Unauthenticated` state
-- Fix 0 data problem in urlencoded requests for update requests
-
+- Swagger.yaml file
 ## Contributing
 
 - Integrate an new service

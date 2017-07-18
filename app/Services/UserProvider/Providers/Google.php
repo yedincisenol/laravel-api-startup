@@ -8,7 +8,6 @@ class Google extends UserProviderAbstract
 
     public function __construct(array $config = null)
     {
-
     }
 
     public static function validate($accessToken)

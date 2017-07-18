@@ -2,14 +2,14 @@
 
 namespace App;
 
-use League\OAuth2\Server\Exception\OAuthServerException;
 use App\Models\UserDevice;
+use App\Models\UserProvider as UserProviderModel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use League\OAuth2\Server\Exception\OAuthServerException;
 use UserProvider;
-use App\Models\UserProvider as UserProviderModel;
 use Validator;
 
 class User extends Authenticatable
@@ -43,10 +43,10 @@ class User extends Authenticatable
     {
         $this->validateUserProviderRequest($request);
 
-        $user = User::query()->where('email', $request->get('email'))->first();
+        $user = self::query()->where('email', $request->get('email'))->first();
 
         if (!$user) {
-            $user = User::create([
+            $user = self::create([
                 'email'     => $request->get('email'),
                 'name'      => $request->get('name'),
                 'password'  => bcrypt(uniqid('pw').'!*-'),
@@ -72,7 +72,7 @@ class User extends Authenticatable
         $provider = $request->get('provider');
 
         if (!UserProvider::validate($provider, $request->get('access_token'))) {
-            throw OauthServerException::accessDenied( trans('auth.token_not_verified', ['provider' => $provider]));
+            throw OauthServerException::accessDenied(trans('auth.token_not_verified', ['provider' => $provider]));
         }
 
         $validator = Validator::make($request->all(), [

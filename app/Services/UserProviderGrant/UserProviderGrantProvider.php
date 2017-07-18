@@ -10,9 +10,7 @@ use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\PasswordGrant;
 
 /**
- * Class CustomQueueServiceProvider
- *
- * @package App\Providers
+ * Class CustomQueueServiceProvider.
  */
 class UserProviderGrantProvider extends PassportServiceProvider
 {
@@ -33,7 +31,6 @@ class UserProviderGrantProvider extends PassportServiceProvider
      */
     public function register()
     {
-
     }
 
     /**

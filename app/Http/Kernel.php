@@ -2,7 +2,12 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ConvertStringToBoolean;
+use App\Http\Middleware\Localization;
+use Barryvdh\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Foundation\Http\Middleware\TrimStrings;
 
 class Kernel extends HttpKernel
 {
@@ -17,6 +22,11 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+        ConvertEmptyStringsToNull::class,
+        TrimStrings::class,
+        Localization::class,
+        ConvertStringToBoolean::class,
+        HandleCors::class,
     ];
 
     /**

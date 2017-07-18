@@ -6,6 +6,7 @@ use App\Models\UserDevice;
 
 class UserDeviceTransformer extends Transformer
 {
+
     public function transform(UserDevice $device)
     {
         if (!is_null($device)) {

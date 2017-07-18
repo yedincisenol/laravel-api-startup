@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Services\UserProvider\UserProviderGrant;
 use App\User;
-use DB;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use UserProvider;
-use Validator;
 
 class Controller extends BaseController
 {
@@ -20,7 +16,6 @@ class Controller extends BaseController
 
     public function register(RegisterRequest $request)
     {
-
         User::create([
             'name'     => $request->get('name'),
             'email'    => $request->get('email'),
@@ -29,5 +24,4 @@ class Controller extends BaseController
 
         return $this->response->created();
     }
-
 }

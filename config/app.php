@@ -90,7 +90,7 @@ return [
 
     'supported_languages' => [
         'en' => 'English',
-        'tr' => 'Turkish'
+        'tr' => 'Turkish',
     ],
 
     /*

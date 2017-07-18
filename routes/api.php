@@ -30,4 +30,4 @@ $api->version('v1.0', [
 
         $api->post('register', 'Controller@register');
         $api->post('notification', 'NotificationController@send');
-});
+    });

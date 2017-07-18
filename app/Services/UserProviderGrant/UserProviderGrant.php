@@ -22,8 +22,7 @@ class UserProviderGrant extends AbstractGrant
     public function __construct(
         UserRepositoryInterface $userRepository,
         RefreshTokenRepositoryInterface $refreshTokenRepository
-    )
-    {
+    ) {
         $this->setUserRepository($userRepository);
         $this->setRefreshTokenRepository($refreshTokenRepository);
         $this->refreshTokenTTL = new \DateInterval('P1M');
@@ -36,8 +35,7 @@ class UserProviderGrant extends AbstractGrant
         ServerRequestInterface $request,
         ResponseTypeInterface $responseType,
         \DateInterval $accessTokenTTL
-    )
-    {
+    ) {
         $scope = $this->getRequestParameter('scope', $request);
         // Validate request
         $client = $this->validateClient($request);
@@ -69,8 +67,9 @@ class UserProviderGrant extends AbstractGrant
     /**
      * @param ServerRequestInterface $request
      *
-     * @return UserEntityInterface
      * @throws OAuthServerException
+     *
+     * @return UserEntityInterface
      */
     protected function validateUser(ServerRequestInterface $request)
     {
@@ -92,8 +91,9 @@ class UserProviderGrant extends AbstractGrant
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Laravel\Passport\Bridge\User|null
      * @throws \League\OAuth2\Server\Exception\OAuthServerException
+     *
+     * @return \Laravel\Passport\Bridge\User|null
      */
     protected function getUserEntityByRequest(Request $request)
     {
@@ -102,7 +102,7 @@ class UserProviderGrant extends AbstractGrant
         }
 
         if (method_exists($model, 'userProviderRequest')) {
-            $user = (new $model)->userProviderRequest($request);
+            $user = (new $model())->userProviderRequest($request);
         } else {
             throw OAuthServerException::serverError('Unable to find byPassportCustomRequest method on user model.');
         }

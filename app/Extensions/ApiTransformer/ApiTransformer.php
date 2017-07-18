@@ -2,9 +2,9 @@
 
 namespace App\Extensions\ApiTransformer;
 
+use Dingo\Api\Http\Request;
 use Dingo\Api\Transformer\Adapter\Fractal;
 use Dingo\Api\Transformer\Binding;
-use Dingo\Api\Http\Request;
 use Illuminate\Contracts\Pagination\Paginator as IlluminatePaginator;
 
 class ApiTransformer extends Fractal
@@ -36,7 +36,7 @@ class ApiTransformer extends Fractal
 
         $resource->setMetaValue('include', [
             'available' => $transformer->getAvailableIncludes(),
-            'default'   => $transformer->getDefaultIncludes()
+            'default'   => $transformer->getDefaultIncludes(),
         ]);
 
         $binding->fireCallback($resource, $this->fractal);

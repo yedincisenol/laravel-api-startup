@@ -17,7 +17,7 @@
 - Ready api test with Postman  
 - Ready api documents for Frontend & Api developer (Visit Wiki)
 - Login with social media (Api Based)
-
+- Ready Android client template: https://github.com/salyangoz/api-startup-android
 ## Let's Start
 
 For start installation please visit Wiki page

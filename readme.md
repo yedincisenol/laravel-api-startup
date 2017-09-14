@@ -28,6 +28,7 @@ For start installation please visit Wiki page
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Swagger.yaml file
 - User roles
+- Filterable
 
 ## Contributing
 

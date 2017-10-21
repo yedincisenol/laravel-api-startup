@@ -17,7 +17,7 @@
 - Ready api test with Postman  
 - Ready api documents for Frontend & Api developer (Visit Wiki)
 - Login with social media (Api Based)
-
+- Ready Android client template: https://github.com/salyangoz/api-startup-android
 ## Let's Start
 
 For start installation please visit Wiki page
@@ -26,6 +26,9 @@ For start installation please visit Wiki page
 - Parameter change for Onesignal on Device services
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Swagger.yaml file
+- User roles
+- Filterable
+
 ## Contributing
 
 - Integrate an new service

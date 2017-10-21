@@ -23,7 +23,6 @@
 For start installation please visit Wiki page
 
 ## What is next?
-- Docker file
 - Parameter change for Onesignal on Device services
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Swagger.yaml file

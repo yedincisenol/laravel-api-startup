@@ -7,6 +7,7 @@
 [![Price](https://img.shields.io/badge/price-FREE-0098f7.svg?style=for-the-badge)](https://github.com/froala/design-blocks/blob/master/LICENSE) 
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/yedincisenol/laravel-api-startup.svg?style=for-the-badge)]()
+[![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.json.svg?style=for-the-badge)]()
 ### Features
 
 - Api Authentication with [Laravel Passport](https://laravel.com/docs/5.4/passport)

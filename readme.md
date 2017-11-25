@@ -28,6 +28,7 @@ For start installation please visit Wiki page
 - Swagger.yaml file
 - User roles
 - Filterable
+- Customize error format
 
 ## Contributing
 

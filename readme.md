@@ -35,6 +35,7 @@ For start installation please visit Wiki page
 - User roles
 - Filterable
 - Customize error format
+- Composer Create-project documentation
 
 ## Contributing
 

@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Exceptions\ValidationException;
 use App\Transformers\UserTransformer;
 use App\User;
-use Validator;
 use Illuminate\Http\Request;
+use Validator;
 
 class UserController extends Controller
 {
     /**
-     * List All Users
+     * List All Users.
+     *
      * @param Request $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function index(Request $request)
@@ -22,6 +24,7 @@ class UserController extends Controller
 
     /**
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function show($id)
@@ -30,8 +33,10 @@ class UserController extends Controller
     }
 
     /**
-     * Delete user
+     * Delete user.
+     *
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function delete($id)
@@ -43,9 +48,11 @@ class UserController extends Controller
     }
 
     /**
-     * Update an user
+     * Update an user.
+     *
      * @param Request $request
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function update(Request $request, $id)

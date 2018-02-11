@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 class MeUpdateRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,13 +15,14 @@ class MeUpdateRequest extends Request
     }
 
     /**
-     * Data validation
+     * Data validation.
+     *
      * @return array
      */
     public function rules()
     {
         return [
-            'email'       => 'required|unique:users,id,' . $this->user()->id,
+            'email'       => 'required|unique:users,id,'.$this->user()->id,
         ];
     }
 }

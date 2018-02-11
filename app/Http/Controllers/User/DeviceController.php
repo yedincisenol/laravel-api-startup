@@ -43,9 +43,10 @@ class DeviceController extends Controller
      *
      * @param Request $request
      * @param $token
-     * @return \Dingo\Api\Http\Response|void
-     * @internal param $id
      *
+     * @return \Dingo\Api\Http\Response|void
+     *
+     * @internal param $id
      */
     public function show(Request $request, $token)
     {
@@ -65,9 +66,10 @@ class DeviceController extends Controller
      *
      * @param Request $request
      * @param $token
-     * @return \Dingo\Api\Http\Response|void
-     * @internal param $id
      *
+     * @return \Dingo\Api\Http\Response|void
+     *
+     * @internal param $id
      */
     public function destroy(Request $request, $token)
     {

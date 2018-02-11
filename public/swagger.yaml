@@ -85,12 +85,12 @@ paths:
               data:
                 type: array
                 items:
-                  $ref: '#/definitions/user'
+                  - $ref: '#/definitions/user'
               meta:
                 $ref: '#/definitions/meta'
   "/user/:id":
     get:
-      tags: 
+      tags:
         - User (Admin)
       summary: Show a user
       description: Show a user
@@ -99,6 +99,7 @@ paths:
           description: User id
           type: integer
           in: path
+          required: true
       security:
         - ClientID: []
         - ClientSecret: []
@@ -118,7 +119,7 @@ paths:
           schema:
             $ref: '#/definitions/error'
     delete:
-      tags: 
+      tags:
         - User (Admin)
       summary: Delete a user
       description: Delete a user
@@ -127,6 +128,7 @@ paths:
           description: User id
           type: integer
           in: path
+          required: true
       security:
         - ClientID: []
         - ClientSecret: []
@@ -139,7 +141,7 @@ paths:
           schema:
               $ref: '#/definitions/error'
     put:
-      tags: 
+      tags:
         - User (Admin)
       summary: Update a user
       description: Update a user
@@ -148,6 +150,7 @@ paths:
           description: User id
           type: integer
           in: path
+          required: true
       security:
         - ClientID: []
         - ClientSecret: []
@@ -166,7 +169,7 @@ paths:
           description: Not found
           schema:
             $ref: '#/definitions/error'
-    
+
   "/register":
     post:
       consumes:
@@ -256,7 +259,7 @@ paths:
                 type: string
   "/self/me":
     get:
-      tags: 
+      tags:
         - Profile
       summary: Me
       description: Logger users profile
@@ -277,11 +280,11 @@ paths:
     put:
       summary: Update Me
       description: Update logged user
-      tags: 
+      tags:
         - Profile
-      consumes: 
+      consumes:
         - "application/x-www-form-urlencoded"
-      parameters: 
+      parameters:
         - name: "name"
           description: "Users name"
           in: formData
@@ -308,9 +311,11 @@ paths:
     post:
       summary: Add device
       description: Add device
-      tags: 
+      tags:
         - Device
-      parameters: 
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
         - name: token
           description: Device onesignal token
           in: formData
@@ -335,11 +340,11 @@ paths:
         - ClientSecret: []
         - UserSecurity: []
     get:
-      tags: 
+      tags:
         - Device
       summary: My devices
       description: Users devices
-      parameters: 
+      parameters:
         - name: page
           description: Page number
           in: query
@@ -365,11 +370,11 @@ paths:
         - UserSecurity: []
   "/self/device/:token":
     get:
-      tags: 
+      tags:
         - Device
       summary: Device details
       description: Device details
-      parameters: 
+      parameters:
         - name: token
           required: true
           description: Device token
@@ -392,11 +397,11 @@ paths:
         - ClientSecret: []
         - UserSecurity: []
     delete:
-      tags: 
+      tags:
         - Device
       summary: Remove device
       description: Remove device
-      parameters: 
+      parameters:
         - name: token
           required: true
           description: device token
@@ -415,7 +420,7 @@ paths:
         - UserSecurity: []
   "/self/setting":
     get:
-      tags: 
+      tags:
         - User settings
       summary: Settings
       description: Get users settings
@@ -428,7 +433,7 @@ paths:
               data:
                 $ref: '#/definitions/setting'
     post:
-      tags: 
+      tags:
         - User settings
       summary: Update settings
       description: Update - create users settings
@@ -445,9 +450,9 @@ paths:
         - Notification
       summary: Sent notification to custom device
       description: Sent notification immedietly
-      consumes: 
+      consumes:
         - "application/x-www-form-urlencoded"
-      parameters: 
+      parameters:
         - name: token
           description: Onesignal token
           required: true
@@ -463,10 +468,12 @@ paths:
           in: formData
           required: false
           type: array
+          items:
+            type: string
       responses:
         201:
           description: OK
-    
+
 securityDefinitions:
   AdminSecurity:
     type: oauth2
@@ -503,7 +510,7 @@ definitions:
         type: integer
   token:
     type: object
-    properties: 
+    properties:
       token_type:
         type: string
       expires_in:
@@ -542,8 +549,13 @@ definitions:
         properties:
           available:
             type: array
+            items:
+              type: string
           default:
             type: array
+            items:
+              type: string
+
   error:
     type: object
     properties:

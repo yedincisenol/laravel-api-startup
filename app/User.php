@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'email', 'password', 'role',
     ];
 
     /**
@@ -29,19 +29,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function device()
     {
         return $this->hasMany(UserDevice::class);
     }
 
-    public function getIsAdminAttribute() {
+    public function getIsAdminAttribute()
+    {
         if ($this->attributes['role'] == 'user') {
             return false;
         }
 
         return true;
     }
-
-
 }

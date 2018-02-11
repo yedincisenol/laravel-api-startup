@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 class MeController extends Controller
 {
     /**
-     * Show logged-in user
+     * Show logged-in user.
+     *
      * @param Request $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function show(Request $request)
@@ -20,8 +22,10 @@ class MeController extends Controller
     }
 
     /**
-     * Update profile infirmation
+     * Update profile infirmation.
+     *
      * @param MeUpdateRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function update(MeUpdateRequest $request)

@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
-class NotificationRequest extends Request
+class MeUpdateRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -15,15 +16,13 @@ class NotificationRequest extends Request
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
+     * Data validation
      * @return array
      */
     public function rules()
     {
         return [
-            'token'                     => 'required|string',
-            'notification_body'         => 'required|string',
+            'email'       => 'required|unique:users,id,' . $this->user()->id,
         ];
     }
 }

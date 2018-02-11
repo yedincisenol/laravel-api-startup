@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Exceptions\ValidationException;
-use App\Services\Filter;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Validator;
 

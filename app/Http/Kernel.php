@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Admin;
 use App\Http\Middleware\ConvertStringToBoolean;
 use App\Http\Middleware\Localization;
 use Barryvdh\Cors\HandleCors;
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'client'     => Middleware\Client::class,
         'scopes'     => \Laravel\Passport\Http\Middleware\CheckScopes::class,
         'scope'      => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        'admin'     =>  Admin::class
     ];
 }

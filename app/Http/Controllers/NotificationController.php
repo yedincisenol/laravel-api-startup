@@ -15,7 +15,7 @@ class NotificationController extends Controller
      */
     public function send(NotificationRequest $request)
     {
-        notification([$request->device_id], [
+        notification([$request->token], [
                 'en' => $request->get('notification_body'),
             ], null, $request->get('notification_data'), 0);
 

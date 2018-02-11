@@ -11,7 +11,7 @@ class UserDeviceTransformer extends Transformer
         if (!is_null($device)) {
             return [
                 'id'            => $device->id,
-                'device_id'     => $device->device_id,
+                'token'         => $device->token,
                 'device_type'   => $device->device_type,
                 'created_at'    => $device->created_at,
             ];

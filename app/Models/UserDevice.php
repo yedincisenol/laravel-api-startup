@@ -16,7 +16,7 @@ class UserDevice extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'device_type', 'device_id',
+        'user_id', 'device_type', 'token',
     ];
 
     /**
@@ -26,7 +26,7 @@ class UserDevice extends Model
      */
     protected $rules = [
         'device_type' => 'required|in:ios,android,web',
-        'device_id'   => 'required|unique:user_devices,device_id,:id,id',
+        'token'       => 'required|unique:user_devices,token,:id,id',
     ];
 
     /**

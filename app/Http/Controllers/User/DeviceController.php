@@ -17,11 +17,11 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->device()->create(
+        $device = $request->user()->device()->create(
             $request->all()
         );
 
-        return $this->response->created();
+        return $this->response->item($device, new UserDeviceTransformer());
     }
 
     /**
@@ -42,13 +42,14 @@ class DeviceController extends Controller
      * Get users device details.
      *
      * @param Request $request
-     * @param $id
-     *
+     * @param $token
      * @return \Dingo\Api\Http\Response|void
+     * @internal param $id
+     *
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $token)
     {
-        $device = $request->user()->device()->where('id', $id)->first();
+        $device = $request->user()->device()->where('token', $token)->first();
 
         if (!isset($device->id)) {
             return $this->response->errorNotFound(trans('exception.device_not_found'));
@@ -63,13 +64,14 @@ class DeviceController extends Controller
      * Remove device.
      *
      * @param Request $request
-     * @param $id
-     *
+     * @param $token
      * @return \Dingo\Api\Http\Response|void
+     * @internal param $id
+     *
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $token)
     {
-        $device = $request->user()->device()->where('device_id', $id)->first();
+        $device = $request->user()->device()->where('token', $token)->first();
         if (isset($device->id)) {
             $device->delete();
 

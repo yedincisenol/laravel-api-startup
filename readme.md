@@ -7,7 +7,7 @@
 [![Price](https://img.shields.io/badge/price-FREE-0098f7.svg?style=for-the-badge)](https://github.com/froala/design-blocks/blob/master/LICENSE) 
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/yedincisenol/laravel-api-startup.svg?style=for-the-badge)]()
-[![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.json.svg?style=for-the-badge)]()
+[![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.yaml.svg)]()
 ### Features
 
 - Api Authentication with [Laravel Passport](https://laravel.com/docs/5.4/passport)
@@ -22,19 +22,15 @@
 - Ready postman collection for Frontend Developer
 - Ready api test with Postman  
 - Ready api documents for Frontend & Api developer (Visit Wiki)
-- Login with social media (Api Based)
 - Ready Android client template: https://github.com/salyangoz/api-startup-android
+- Ready user roles mechanism
 ## Let's Start
 
 For start installation please visit Wiki page
 
 ## What is next?
-- Parameter change for Onesignal on Device services
 - Fix `500` response code to `401` on   `Unauthenticated` state
-- Swagger.yaml file
-- User roles
 - Filterable
-- Customize error format
 - Composer Create-project documentation
 
 ## Contributing

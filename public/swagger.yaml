@@ -1,0 +1,556 @@
+swagger: "2.0"
+info:
+  description: "Api is live on: `http://api-startup.yedincisenol.com/` and default version is `v1.0`.
+
+## Api Auth
+
+For access Api you need know client credential
+`client-id` and `client-secret`. You can obtain these from your Api developer.
+
+For send `POST` or `PUT` default `Content-Type` is `application/x-www-form-urlencoded`
+
+## Rate Limiting
+
+All endpoints protect with [Rate Limiting](https://github.com/dingo/api/wiki/Rate-Limiting). In default one ip send max
+`200` request in `5` minutes. Over the limit, web services return `500` error.
+
+You can view `RateLimit` status in Response headers
+
+
+```
+
+X-RateLimit-Limit : 200
+
+X-RateLimit-Remaining : 192
+
+X-RateLimit-Reset : 1490145803
+
+```
+
+"
+  version: "1.1.0"
+  title: "Laravel Api Startup"
+  contact:
+    email: "o@yedincisenol.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "api-startup.yedincisenol.com"
+basePath: "/"
+schemes:
+- "http"
+x-logo:
+  url: 'https://rebilly.github.io/ReDoc/petstore-logo.png'
+x-tagGroups:
+  - name: Admin
+    tags:
+      - User (Admin)
+  - name: User
+    tags:
+      - Profile
+      - User
+      - User settings
+      - Device
+  - name: Others
+    tags:
+      - Notification
+paths:
+  "/user":
+    get:
+      tags: 
+        - User (Admin)
+      summary: Get all users (Admin)
+      description: Get all users
+      parameters: 
+        - name: limit
+          required: false
+          in: query
+          description: Pagination Limit
+          type: integer
+        - name: page
+          required: false
+          in: query
+          description: Page number
+          type: integer
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+  "/user/:id":
+    get:
+      tags: 
+        - User (Admin)
+      summary: Show a user
+      description: Show a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+    delete:
+      tags: 
+        - User (Admin)
+      summary: Delete a user
+      description: Delete a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        204:
+          description: OK
+        404:
+          description: Not found
+          schema:
+              $ref: '#/definitions/error'
+    put:
+      tags: 
+        - User (Admin)
+      summary: Update a user
+      description: Update a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+    
+  "/register":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+        - "User"
+      summary: "Register"
+      parameters:
+      - in: formData
+        name: "name"
+        required: true
+        description: "Name"
+        type: string
+      - name: email
+        in: formData
+        required: true
+        description: "Email"
+        type: string
+      - name: password
+        in: formData
+        required: true
+        description: "Password"
+        type: string
+      security:
+        - ClientID: []
+        - ClientSecret: []
+      responses:
+        201:
+          description: "Success"
+        422:
+          description: "Email allready use"
+          schema:
+            $ref: '#/definitions/error'
+  "/oauth/token":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+      - "User"
+      summary: "Login"
+      description: "Get access token with Password"
+      parameters:
+      - in: "formData"
+        name: "username"
+        description: "Email address for user"
+        required: true
+        type: string
+      - in: "formData"
+        name: "password"
+        description: "Users password"
+        required: true
+        type: string
+      - in: "formData"
+        name: "grant_type"
+        description: "Login grant type: password, refresh_token"
+        required: true
+        type: string
+      - in: "formData"
+        name: "client_id"
+        description: "Api client client id"
+        required: true
+        type: string
+      - in: "formData"
+        name: "client_secret"
+        description: "Api client secret"
+        required: true
+        type: string
+      - in: "formData"
+        name: "scope"
+        description: "Token scope"
+        required: true
+        default: "*"
+        type: string
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: '#/definitions/token'
+        401:
+          description: "Unauthenticated"
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              message:
+                type: string
+  "/self/me":
+    get:
+      tags: 
+        - Profile
+      summary: Me
+      description: Logger users profile
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+    put:
+      summary: Update Me
+      description: Update logged user
+      tags: 
+        - Profile
+      consumes: 
+        - "application/x-www-form-urlencoded"
+      parameters: 
+        - name: "name"
+          description: "Users name"
+          in: formData
+          type: string
+        - name: "email"
+          description: "Users email"
+          in: formData
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+  "/self/device":
+    post:
+      summary: Add device
+      description: Add device
+      tags: 
+        - Device
+      parameters: 
+        - name: token
+          description: Device onesignal token
+          in: formData
+          required: true
+          type: string
+        - name: device_type
+          description: Device type (ios, android, web)
+          in: formData
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/device'
+              meta:
+                $ref: '#/definitions/meta'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+    get:
+      tags: 
+        - Device
+      summary: My devices
+      description: Users devices
+      parameters: 
+        - name: page
+          description: Page number
+          in: query
+          required: false
+          type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                  $ref: '#/definitions/device'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+  "/self/device/:token":
+    get:
+      tags: 
+        - Device
+      summary: Device details
+      description: Device details
+      parameters: 
+        - name: token
+          required: true
+          description: Device token
+          in: path
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/device'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+    delete:
+      tags: 
+        - Device
+      summary: Remove device
+      description: Remove device
+      parameters: 
+        - name: token
+          required: true
+          description: device token
+          in: path
+          type: string
+      responses:
+        204:
+          description: OK
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+  "/self/setting":
+    get:
+      tags: 
+        - User settings
+      summary: Settings
+      description: Get users settings
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/setting'
+    post:
+      tags: 
+        - User settings
+      summary: Update settings
+      description: Update - create users settings
+      responses:
+        201:
+          description: OK
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+  "/notification":
+    post:
+      tags:
+        - Notification
+      summary: Sent notification to custom device
+      description: Sent notification immedietly
+      consumes: 
+        - "application/x-www-form-urlencoded"
+      parameters: 
+        - name: token
+          description: Onesignal token
+          required: true
+          in: formData
+          type: string
+        - name: notification_body
+          description: Notification header
+          required: true
+          in: formData
+          type: string
+        - name: notification_data
+          description: Notification data array
+          in: formData
+          required: false
+          type: array
+      responses:
+        201:
+          description: OK
+    
+securityDefinitions:
+  AdminSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: 'http://api-startup.yedincisenol.com/oauth/token'
+    scopes:
+      '*': All Scopes
+  ClientID:
+    type: apiKey
+    in: header
+    name: client-id
+  ClientSecret:
+    type: apiKey
+    name: client-secret
+    in: header
+  Language:
+    type: apiKey
+    name: Accept-Language
+    in: header
+  Timezone:
+    type: apiKey
+    name: Timezone
+    in: header
+  UserSecurity:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: User Auth.
+definitions:
+  setting:
+    type: object
+    properties:
+      is_notification_on:
+        type: integer
+  token:
+    type: object
+    properties: 
+      token_type:
+        type: string
+      expires_in:
+        type: integer
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+  user:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
+      role:
+        type: string
+  device:
+    type: object
+    properties:
+      id:
+        type: integer
+      token:
+        type: string
+      device_type:
+        type: string
+      created_at:
+        type: string
+  meta:
+    type: object
+    properties:
+      include:
+        type: object
+        properties:
+          available:
+            type: array
+          default:
+            type: array
+  error:
+    type: object
+    properties:
+      message:
+        type: string
+      error:
+        type: string
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

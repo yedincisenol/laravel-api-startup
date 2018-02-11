@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-./vendor/bin/phpunit --version
-
 class ExampleTest extends TestCase
 {
     /**

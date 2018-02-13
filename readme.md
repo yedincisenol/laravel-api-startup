@@ -8,6 +8,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/yedincisenol/laravel-api-startup.svg?style=for-the-badge)]()
 [![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.yaml.svg)]()
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/yedincisenol/laravel-api-startup)
 ### Features
 
 - Api Authentication with [Laravel Passport](https://laravel.com/docs/5.4/passport)
@@ -31,7 +32,6 @@ For start installation please visit Wiki page
 ## What is next?
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Filterable
-- Composer Create-project documentation
 
 ## Contributing
 

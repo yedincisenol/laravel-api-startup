@@ -8,7 +8,9 @@
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/yedincisenol/laravel-api-startup.svg?style=for-the-badge)]()
 [![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.yaml.svg?style=for-the-badge)]()
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=for-the-badge)](https://github.com/yedincisenol/laravel-api-startup)### Features
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=for-the-badge)](https://github.com/yedincisenol/laravel-api-startup)
+
+### Features
 
 - Api Authentication with [Laravel Passport](https://laravel.com/docs/5.4/passport)
 - User authentication with [oAuth2 Server](https://github.com/thephpleague/oauth2-server)

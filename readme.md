@@ -26,6 +26,7 @@
 - Ready api documents for Frontend & Api developer (Visit Wiki)
 - Ready Android client template: https://github.com/salyangoz/api-startup-android
 - Ready user roles mechanism
+- Ready travis CI integration
 ## Let's Start
 
 For start installation please visit Wiki page

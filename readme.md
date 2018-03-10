@@ -36,6 +36,7 @@ For start installation please visit Wiki page
 - Filterable
 - Update Laravel
 - Timezone middleware
+- Remove `laravel-cors`
 
 ## Contributing
 

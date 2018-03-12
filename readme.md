@@ -37,6 +37,7 @@ For start installation please visit Wiki page
 - Update Laravel
 - Timezone middleware
 - Remove `laravel-cors`
+- Add php requirements to `composer.json`
 
 ## Contributing
 

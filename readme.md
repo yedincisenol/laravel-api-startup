@@ -25,6 +25,7 @@
 - Ready api test with Postman  
 - Ready api documents for Frontend & Api developer (Visit Wiki)
 - Ready Android client template: https://github.com/salyangoz/api-startup-android
+- Ready Dashboard client template: https://github.com/yedincisenol/api-startup-dashboard
 - Ready user roles mechanism
 - Ready travis CI integration
 ## Let's Start

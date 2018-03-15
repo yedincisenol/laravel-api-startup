@@ -41,6 +41,7 @@ For start installation please visit Wiki page
 - Add php requirements to `composer.json`
 - Password update
 - Username update
+- String `null` to data `null` middleware
 
 ## Contributing
 

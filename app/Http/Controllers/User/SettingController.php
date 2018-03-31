@@ -27,11 +27,10 @@ class SettingController extends Controller
         Setting::setExtraColumns([
             'user_id' => $request->user()->id,
         ]);
-
         $settings = $request->only($this->availableSettings);
 
         foreach ($settings as $key => $value) {
-            if ($value) {
+            if ($value !== false) {
                 Setting::set($key, $value);
             }
         }

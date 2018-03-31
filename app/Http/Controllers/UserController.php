@@ -59,7 +59,7 @@ class UserController extends Controller
     {
         $user = $this->find($id);
         $validator = Validator::make($request->all(), [
-            'email'       => 'unique:users',
+            'email'       => 'unique:users,id,' . $request->user()->id,
         ]);
 
         if ($validator->fails()) {

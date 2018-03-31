@@ -1,0 +1,37 @@
+version: '2'
+services:
+  nginx:
+    image: shippingdocker/nginx:latest
+    ports:
+     - "80:80"
+    volumes:
+     - ./application:/var/www/html
+    networks:
+     - appnet
+  php:
+    image: shippingdocker/php:latest
+    volumes:
+     - ./application:/var/www/html
+    networks:
+     - appnet
+  redis:
+    image: redis:alpine
+    networks:
+     - appnet
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+    volumes:
+     - data:/var/lib/mysql
+    networks:
+     - appnet
+networks:
+  appnet:
+    driver: "bridge"
+volumes:
+  data:
+    driver: "local"

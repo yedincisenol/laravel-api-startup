@@ -49,6 +49,7 @@ x-tagGroups:
     tags:
       - Profile
       - User
+      - Password Update
       - User settings
       - Device
   - name: Others
@@ -414,6 +415,31 @@ paths:
           description: Not found
           schema:
             $ref: '#/definitions/error'
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+  "/user/password":
+    put:
+      tags:
+        - Password Update
+      summary: Password Update
+      description: Update password with current password
+      responses:
+        422:
+          description: Wrong password
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
       security:
         - ClientID: []
         - ClientSecret: []

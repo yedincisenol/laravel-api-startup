@@ -26,6 +26,10 @@ class ConvertStringToBoolean extends TransformsRequest
             return false;
         }
 
+        if ($lowered === 'null') {
+            return null;
+        }
+
         return $value;
     }
 }

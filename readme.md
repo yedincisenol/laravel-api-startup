@@ -28,6 +28,8 @@
 - Ready Dashboard client template: https://github.com/yedincisenol/api-startup-dashboard
 - Ready user roles mechanism
 - Ready travis CI integration
+- Password update
+- Ready localization with `timezone` header
 ## Let's Start
 
 For start installation please visit Wiki page
@@ -35,13 +37,7 @@ For start installation please visit Wiki page
 ## What is next?
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Filterable
-- Update Laravel
-- Timezone middleware
-- Remove `laravel-cors`
-- Add php requirements to `composer.json`
-- Password update
 - Username update
-- String `null` to data `null` middleware
 
 ## Contributing
 

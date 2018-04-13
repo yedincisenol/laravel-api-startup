@@ -52,8 +52,7 @@ class Localization
 
         if ($request->header('Timezone')) {
             // set Timezone
-            config('app.timezone', $request->header('Timezone'));
-            date_default_timezone_set($request->header('Timezone'));
+            session(['timezone' => $request->header('Timezone')]);
         }
 
         // get the response after the request is done

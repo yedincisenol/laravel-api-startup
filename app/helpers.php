@@ -13,3 +13,16 @@ function notification($deviceIds, $title, $body, $data, $ttl = 259200)
         ['include_player_ids' => $deviceIds, 'contents' => $body, 'data' => $data,
             'headings'        => $title, 'ttl' => $ttl, ]);
 }
+
+/**
+ * Set timezone to date
+ * @param $date
+ * @return null
+ */
+function timezone($date)
+{
+    if (!$date) {
+        return null;
+    }
+    return $date->timezone(session('timezone'));
+}

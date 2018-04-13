@@ -195,7 +195,6 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
         anlutro\LaravelSettings\ServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
     ],
 

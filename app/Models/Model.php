@@ -76,7 +76,7 @@ abstract class Model extends BaseModel
      */
     public function getDates()
     {
-        return [];
+        return $this->dates;
     }
 
     /**

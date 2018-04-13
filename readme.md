@@ -7,7 +7,9 @@
 [![Price](https://img.shields.io/badge/price-FREE-0098f7.svg?style=for-the-badge)](https://github.com/froala/design-blocks/blob/master/LICENSE) 
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()
 [![Docker Pulls](https://img.shields.io/docker/pulls/yedincisenol/laravel-api-startup.svg?style=for-the-badge)]()
-[![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.yaml.svg)]()
+[![Swagger Validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/yedincisenol/laravel-api-startup/master/public/swagger.yaml.svg?style=for-the-badge)]()
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=for-the-badge)](https://github.com/yedincisenol/laravel-api-startup)
+
 ### Features
 
 - Api Authentication with [Laravel Passport](https://laravel.com/docs/5.4/passport)
@@ -23,7 +25,9 @@
 - Ready api test with Postman  
 - Ready api documents for Frontend & Api developer (Visit Wiki)
 - Ready Android client template: https://github.com/salyangoz/api-startup-android
+- Ready Dashboard client template: https://github.com/yedincisenol/api-startup-dashboard
 - Ready user roles mechanism
+- Ready travis CI integration
 ## Let's Start
 
 For start installation please visit Wiki page
@@ -31,7 +35,13 @@ For start installation please visit Wiki page
 ## What is next?
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Filterable
-- Composer Create-project documentation
+- Update Laravel
+- Timezone middleware
+- Remove `laravel-cors`
+- Add php requirements to `composer.json`
+- Password update
+- Username update
+- String `null` to data `null` middleware
 
 ## Contributing
 

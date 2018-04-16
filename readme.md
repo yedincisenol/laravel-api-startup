@@ -2,7 +2,7 @@
 
 "Laravel api startup" is a Laravel project for start build an Api quickly! 
 
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build+perfect+api+quickly.+https%3A%2F%2Fgithub.com%2Fyedincisenol%2Flaravel-api-startup+%40yedincisenol) &nbsp;[![Slack](https://froala-design-blocks-slack.herokuapp.com/badge.svg?style=social)](https://laravel-api-startup.slack.com/)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build+perfect+api+quickly.+https%3A%2F%2Fgithub.com%2Fyedincisenol%2Flaravel-api-startup+%40yedincisenol) 
 
 [![Price](https://img.shields.io/badge/price-FREE-0098f7.svg?style=for-the-badge)](https://github.com/froala/design-blocks/blob/master/LICENSE) 
 [![Github All Releases](https://img.shields.io/github/downloads/yedincisenol/laravel-api-startup/total.svg?style=for-the-badge)]()

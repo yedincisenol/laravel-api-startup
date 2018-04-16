@@ -50,8 +50,7 @@
         "post-root-package-install": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php -r \"touch('storage/oauth-private.key');\"",
-            "php artisan key:generate"
+            "php -r \"touch('storage/oauth-private.key');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate"

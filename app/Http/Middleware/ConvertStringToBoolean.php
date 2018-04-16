@@ -27,7 +27,7 @@ class ConvertStringToBoolean extends TransformsRequest
         }
 
         if ($lowered === 'null') {
-            return null;
+            return;
         }
 
         return $value;

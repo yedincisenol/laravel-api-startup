@@ -37,15 +37,15 @@ class MeController extends Controller
         return $this->response->item($request->user(), new UserTransformer());
     }
 
-
     /**
-     * Update password
+     * Update password.
+     *
      * @param PasswordUpdateRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function passwordUpdate(PasswordUpdateRequest $request)
     {
-
         if (!Hash::check($request->get('current_password'), $request->user()->password)) {
             abort(422, trans('passwords.wrong_password'));
         }
@@ -53,7 +53,7 @@ class MeController extends Controller
         $password = $request->get('password');
 
         $request->user()->update([
-            'password' => bcrypt($password)
+            'password' => bcrypt($password),
         ]);
 
         return $this->response->item($request->user(), new UserTransformer());

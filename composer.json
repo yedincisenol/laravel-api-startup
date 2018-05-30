@@ -52,10 +52,13 @@
         }
     },
     "scripts": {
-        "post-root-package-install": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+        "pre-install-cmd": [
             "php -r \"touch('storage/oauth-private.key');\""
+        ],
+        "post-root-package-install": [
+            "php -r \"touch('storage/oauth-private.key');\"",
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate"

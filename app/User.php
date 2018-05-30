@@ -3,10 +3,10 @@
 namespace App;
 
 use App\Models\UserDevice;
-use yedincisenol\UserProvider\Models\UserProvider;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use yedincisenol\UserProvider\Models\UserProvider;
 
 class User extends Authenticatable
 {
@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'username', 'is_active', 'picture_url', 'verification_code', 'deleted_at'
+        'name', 'email', 'password', 'role', 'username', 'is_active', 'picture_url', 'verification_code', 'deleted_at',
     ];
 
     /**
@@ -44,12 +44,15 @@ class User extends Authenticatable
     }
 
     /**
-     * Login with email or mobile
+     * Login with email or mobile.
+     *
      * @param $identifier
+     *
      * @return mixed
      */
-    public function findForPassport($identifier) {
-        return $this->where(function($query) use ($identifier) {
+    public function findForPassport($identifier)
+    {
+        return $this->where(function ($query) use ($identifier) {
             $query->where('email', $identifier)
                 ->orWhere('username', $identifier);
         })->first();

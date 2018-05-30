@@ -9,11 +9,11 @@ class UserTransformer extends Transformer
     public function transform(User $user)
     {
         return [
-            'id'    => (int) $user->id,
-            'name'  => $user->name,
-            'email' => $user->email,
-            'role'  => $user->role,
-            'username'      =>  $user->username,
+            'id'            => (int) $user->id,
+            'name'          => $user->name,
+            'email'         => $user->email,
+            'role'          => $user->role,
+            'username'      => $user->username,
         ];
     }
 }

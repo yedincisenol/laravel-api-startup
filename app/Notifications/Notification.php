@@ -8,88 +8,102 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 abstract class Notification extends \Illuminate\Notifications\Notification implements ShouldQueue
 {
     use Queueable;
+
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
-    abstract function via($notifiable);
+    abstract public function via($notifiable);
 
     /**
-     * Notification text
+     * Notification text.
+     *
      * @param $notifiable
+     *
      * @return mixed
      */
-    abstract function text($notifiable);
+    abstract public function text($notifiable);
 
     /**
-     * Notification lik(uri)
+     * Notification lik(uri).
+     *
      * @return mixed
      */
-    abstract function uri();
+    abstract public function uri();
 
     /**
-     * Notification right image url
+     * Notification right image url.
+     *
      * @return mixed
      */
-    abstract function rightImageUrl();
+    abstract public function rightImageUrl();
 
     /**
-     * Notification left image url
+     * Notification left image url.
+     *
      * @return mixed
      */
-    abstract function leftImageUrl();
+    abstract public function leftImageUrl();
 
     /**
-     * Notification title
+     * Notification title.
+     *
      * @param $notifiable
+     *
      * @return mixed
      */
-    abstract function title($notifiable);
+    abstract public function title($notifiable);
 
     /**
-     * Notification note
+     * Notification note.
+     *
      * @param $notifiable
+     *
      * @return mixed
      */
-    abstract function note($notifiable);
+    abstract public function note($notifiable);
 
     /**
-     * Notification type
+     * Notification type.
+     *
      * @return mixed
      */
-    abstract function type();
+    abstract public function type();
 
     /**
-     * Notification point
+     * Notification point.
+     *
      * @return mixed
      */
-    abstract function point();
+    abstract public function point();
 
     /**
-     * Notification releated user (Not owner)
+     * Notification releated user (Not owner).
+     *
      * @return mixed
      */
-    abstract function user();
+    abstract public function user();
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            'title'             =>  $this->title($notifiable),
-            'text'              =>  $this->text($notifiable),
-            'note'              =>  $this->note($notifiable),
-            'uri'               =>  $this->uri(),
-            'type'              =>  $this->type(),
-            'point'             =>  $this->point(),
-            'left_image_url'    =>  $this->leftImageUrl(),
+            'title'             => $this->title($notifiable),
+            'text'              => $this->text($notifiable),
+            'note'              => $this->note($notifiable),
+            'uri'               => $this->uri(),
+            'type'              => $this->type(),
+            'point'             => $this->point(),
+            'left_image_url'    => $this->leftImageUrl(),
         ];
     }
-
 }

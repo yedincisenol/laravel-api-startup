@@ -3,18 +3,18 @@
 return [
     'facebook' => [
         'controller'    => 'App\\Http\\Controllers\\RegisterController',
-        'method'        => 'withFacebook'
+        'method'        => 'withFacebook',
     ],
     'google' => [
         'controller'    => 'App\\Http\\Controllers\\RegisterController',
-        'method'        => 'withGoogle'
+        'method'        => 'withGoogle',
     ],
     'twitter' => [
         'controller'    => 'App\\Http\\Controllers\\RegisterController',
-        'method'        => 'withTwitter'
+        'method'        => 'withTwitter',
     ],
     'linkedin' => [
         'controller'    => 'App\\Http\\Controllers\\RegisterController',
-        'method'        => 'withLinkedin'
+        'method'        => 'withLinkedin',
     ],
 ];

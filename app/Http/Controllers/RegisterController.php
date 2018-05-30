@@ -5,28 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Notifications\EmailVerificationNotification;
 use App\User;
+use Illuminate\Http\Request;
 use yedincisenol\UserProvider\Models\UserProvider;
 use yedincisenol\UserProviderFacebook\FacebookTokenValidationRule;
 use yedincisenol\UserProviderGoogle\GoogleTokenValidationRule;
 use yedincisenol\UserProviderLinkedin\LinkedinTokenValidationRule;
 use yedincisenol\UserProviderTwitter\TwitterTokenValidationRule;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
-
     /**
-     * Manual register
+     * Manual register.
+     *
      * @param RegisterRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function email(RegisterRequest $request)
     {
         $user = User::create([
-            'name'     => $request->get('name'),
-            'email'    => $request->get('email'),
-            'password' => bcrypt($request->get('password')),
-            'verification_code' =>  app('app\Http\Controllers\Controller')->getVerificationCode()
+            'name'              => $request->get('name'),
+            'email'             => $request->get('email'),
+            'password'          => bcrypt($request->get('password')),
+            'verification_code' => app('app\Http\Controllers\Controller')->getVerificationCode(),
         ]);
 
         $user->notify(new EmailVerificationNotification());
@@ -35,83 +36,88 @@ class RegisterController extends Controller
     }
 
     /**
-     * Login with Google
+     * Login with Google.
+     *
      * @param Request $request
+     *
      * @return mixed
      */
     public function withGoogle(Request $request)
     {
         $this->validate($request, [
-            'access_token'  =>  ['required', new GoogleTokenValidationRule()],
-            'google_id'     =>  'required',
-            'name'          =>  'required'
+            'access_token'  => ['required', new GoogleTokenValidationRule()],
+            'google_id'     => 'required',
+            'name'          => 'required',
         ]);
 
         $user = $this->getUser($request, $request->get('google_id'));
         $user->providers()->updateOrCreate([
-            'provider'          =>  'google',
-            'provider_user_id'  =>  $request->get('google_id'),
-        ],[
-            'access_token'      =>  $request->get('access_token'),
+            'provider'          => 'google',
+            'provider_user_id'  => $request->get('google_id'),
+        ], [
+            'access_token'      => $request->get('access_token'),
         ]);
 
         return $user;
     }
 
-
     /**
-     * Login with Twitter
+     * Login with Twitter.
+     *
      * @param Request $request
+     *
      * @return mixed
      */
     public function withLinkedin(Request $request)
     {
         $this->validate($request, [
-            'access_token'  =>  ['required', new LinkedinTokenValidationRule()],
-            'linkedin_id'   =>  'required',
-            'name'          =>  'required'
+            'access_token'  => ['required', new LinkedinTokenValidationRule()],
+            'linkedin_id'   => 'required',
+            'name'          => 'required',
         ]);
 
         $user = $this->getUser($request, $request->get('linkedin_id'));
         $user->providers()->updateOrCreate([
-            'provider'          =>  'twitter',
-            'provider_user_id'  =>  $request->get('linkedin_id'),
-        ],[
-            'access_token'      =>  $request->get('access_token'),
+            'provider'          => 'twitter',
+            'provider_user_id'  => $request->get('linkedin_id'),
+        ], [
+            'access_token'      => $request->get('access_token'),
         ]);
 
         return $user;
     }
 
-
     /**
-     * Login with Twitter
+     * Login with Twitter.
+     *
      * @param Request $request
+     *
      * @return mixed
      */
     public function withTwitter(Request $request)
     {
         $this->validate($request, [
-            'access_token'  =>  ['required', new TwitterTokenValidationRule()],
-            'twitter_id'    =>  'required',
-            'name'          =>  'required'
+            'access_token'  => ['required', new TwitterTokenValidationRule()],
+            'twitter_id'    => 'required',
+            'name'          => 'required',
         ]);
 
         $user = $this->getUser($request, $request->get('twitter_id'));
         $user->providers()->updateOrCreate([
-            'provider'          =>  'twitter',
-            'provider_user_id'  =>  $request->get('twitter_id'),
-        ],[
-            'access_token'      =>  $request->get('access_token'),
+            'provider'          => 'twitter',
+            'provider_user_id'  => $request->get('twitter_id'),
+        ], [
+            'access_token'      => $request->get('access_token'),
         ]);
 
         return $user;
     }
 
-
     /**
-     * Validate and login user by provider
+     * Validate and login user by provider.
+     *
      * @param Request $request
+     *
      * @return mixed
      */
     public function withFacebook(Request $request)
@@ -125,19 +131,21 @@ class RegisterController extends Controller
         $user = $this->getUser($request, $request->get('facebook_id'));
 
         $user->providers()->updateOrCreate([
-            'provider'          =>  'facebook',
-            'provider_user_id'  =>  $request->get('facebook_id'),
-        ],[
-            'access_token'      =>  $request->get('access_token'),
+            'provider'          => 'facebook',
+            'provider_user_id'  => $request->get('facebook_id'),
+        ], [
+            'access_token'      => $request->get('access_token'),
         ]);
 
         return $user;
     }
 
     /**
-     * Get or create user by provider
+     * Get or create user by provider.
+     *
      * @param $request
      * @param $id
+     *
      * @return mixed
      */
     private function getUser($request, $id)
@@ -154,21 +162,22 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create user
+     * Create user.
+     *
      * @param $request
      * @param $id
+     *
      * @return mixed
      */
     private function createUser($request, $id)
     {
         $user = User::create([
-            'name'          =>  $request->get('name'),
-            'email'         =>  $request->get('email', 'temp-' . $id . '@yedincisenol.com'),
-            'password'      =>  bcrypt($id),
-            'picture_url'   =>  $request->get('picture_url'),
+            'name'          => $request->get('name'),
+            'email'         => $request->get('email', 'temp-'.$id.'@yedincisenol.com'),
+            'password'      => bcrypt($id),
+            'picture_url'   => $request->get('picture_url'),
         ]);
 
         return $user;
-
     }
 }

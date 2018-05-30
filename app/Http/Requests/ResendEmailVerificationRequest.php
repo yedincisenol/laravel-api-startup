@@ -22,7 +22,7 @@ class ResendEmailVerificationRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required'
+            'email' => 'required',
         ];
     }
 }

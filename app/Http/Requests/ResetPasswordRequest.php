@@ -22,14 +22,14 @@ class ResetPasswordRequest extends Request
     public function rules()
     {
         return [
-            'email'    =>  'required|exists:users,email'
+            'email'    => 'required|exists:users,email',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.exists' =>  trans('user.user_not_found_with_this_email')
+            'email.exists' => trans('user.user_not_found_with_this_email'),
         ];
     }
 }

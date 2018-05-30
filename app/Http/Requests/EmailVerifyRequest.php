@@ -23,7 +23,7 @@ class EmailVerifyRequest extends Request
     {
         return [
             'email' => 'required',
-            'code'  => 'required|numeric'
+            'code'  => 'required|numeric',
         ];
     }
 }

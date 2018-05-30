@@ -5,10 +5,9 @@ namespace App\Models;
 class PasswordReset extends Model
 {
     /**
-     * primaryKey
+     * primaryKey.
      *
-     * @var integer
-     * @access protected
+     * @var int
      */
     protected $primaryKey = 'email';
 
@@ -21,7 +20,11 @@ class PasswordReset extends Model
 
     protected $fillable = ['email', 'token', 'user_id'];
 
-    public function setUpdatedAt($value){}
+    public function setUpdatedAt($value)
+    {
+    }
 
-    public function getUpdatedAtColumn(){}
+    public function getUpdatedAtColumn()
+    {
+    }
 }

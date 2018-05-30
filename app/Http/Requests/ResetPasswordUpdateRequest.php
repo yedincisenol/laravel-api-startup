@@ -22,9 +22,9 @@ class ResetPasswordUpdateRequest extends Request
     public function rules()
     {
         return [
-            'email'     =>  'required',
-            'code'      =>  'required',
-            'password'  =>  'required|min:6'
+            'email'     => 'required',
+            'code'      => 'required',
+            'password'  => 'required|min:6',
         ];
     }
 }

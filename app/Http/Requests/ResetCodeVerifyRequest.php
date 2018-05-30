@@ -22,8 +22,8 @@ class ResetCodeVerifyRequest extends Request
     public function rules()
     {
         return [
-            'email'    =>  'required',
-            'code'      =>  'required|numeric'
+            'email'     => 'required',
+            'code'      => 'required|numeric',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ValidationException;
 use App\Http\Requests\EmailVerifyRequest;
 use App\Http\Requests\ResendEmailVerificationRequest;
 use App\Http\Requests\ResetCodeVerifyRequest;
@@ -10,9 +11,6 @@ use App\Http\Requests\ResetPasswordUpdateRequest;
 use App\Models\PasswordReset;
 use App\Notifications\EmailVerificationNotification;
 use App\Notifications\ResetPasswordNotification;
-use Response;
-use App\Exceptions\ValidationException;
-use Validator;
 use App\User;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,8 +18,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Response;
+use Validator;
 
-class   Controller extends BaseController
+class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Helpers;
 
@@ -30,7 +30,6 @@ class   Controller extends BaseController
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-
             try {
                 throw new ValidationException($validator->errors());
             } catch (\Exception $e) {
@@ -41,8 +40,10 @@ class   Controller extends BaseController
     }
 
     /**
-     * Check username exists
+     * Check username exists.
+     *
      * @param Request $request
+     *
      * @return \Dingo\Api\Http\Response|void
      */
     public function username(Request $request)
@@ -51,19 +52,21 @@ class   Controller extends BaseController
         if (strlen($username) < 3) {
             return $this->response->errorBadRequest(trans('user.least_3_letter'));
         }
-        if (str_slug($username) != $username)
-        {
+        if (str_slug($username) != $username) {
             return $this->response->errorBadRequest(trans('user.username_not_valid'));
         }
         if (User::query()->where('username', $username)->exists()) {
             return $this->response()->error(trans('user.username_in_use'), 409);
         }
+
         return $this->response()->noContent();
     }
 
     /**
-     * Email verify web interface
+     * Email verify web interface.
+     *
      * @param Request $request
+     *
      * @return array|\Illuminate\Contracts\Translation\Translator|null|string
      */
     public function emailVerifyWeb(Request $request)
@@ -78,9 +81,11 @@ class   Controller extends BaseController
     }
 
     /**
-     * Verify email code
+     * Verify email code.
+     *
      * @param $email
      * @param $code
+     *
      * @return bool
      */
     private function verificationCodeValidate($email, $code)
@@ -102,8 +107,10 @@ class   Controller extends BaseController
     }
 
     /**
-     * Email verify
+     * Email verify.
+     *
      * @param EmailVerifyRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function emailVerify(EmailVerifyRequest $request)
@@ -117,8 +124,10 @@ class   Controller extends BaseController
     }
 
     /**
-     * Resend email verification code
+     * Resend email verification code.
+     *
      * @param ResendEmailVerificationRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function resendEmailVerification(ResendEmailVerificationRequest $request)
@@ -129,19 +138,20 @@ class   Controller extends BaseController
 
         if (!$user) {
             abort(404, trans('user.user_not_found_with_this_email'));
-        } elseif(!$user->verification_code) {
+        } elseif (!$user->verification_code) {
             abort(400, trans('user.email_already_validated'));
         }
 
         $user->notify(new EmailVerificationNotification());
 
         return $this->response->created();
-
     }
 
     /**
-     * Password reset request
+     * Password reset request.
+     *
      * @param ResetPasswordRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function resetPasswordRequest(ResetPasswordRequest $request)
@@ -151,9 +161,9 @@ class   Controller extends BaseController
             ->first();
 
         $reset = PasswordReset::updateOrCreate([
-            'email' => $user->email
+            'email' => $user->email,
         ], [
-            'token' => $this->getVerificationCode()
+            'token' => $this->getVerificationCode(),
         ]);
 
         $user->notify(new ResetPasswordNotification($reset->token));
@@ -162,8 +172,10 @@ class   Controller extends BaseController
     }
 
     /**
-     * Reset password
+     * Reset password.
+     *
      * @param ResetPasswordUpdateRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function updatePassword(ResetPasswordUpdateRequest $request)
@@ -185,7 +197,7 @@ class   Controller extends BaseController
         $password = $request->get('password');
 
         $user->update([
-            'password'  =>  bcrypt($password)
+            'password'  => bcrypt($password),
         ]);
 
         $passwordReset->delete();
@@ -194,7 +206,8 @@ class   Controller extends BaseController
     }
 
     /**
-     * Verify reset code
+     * Verify reset code.
+     *
      * @param ResetCodeVerifyRequest $request
      */
     public function resetCodeVerify(ResetCodeVerifyRequest $request)
@@ -208,18 +221,20 @@ class   Controller extends BaseController
         if (!$exists) {
             return abort(400, trans('user.verification_failed'));
         }
-
     }
 
     /**
-     * Get unique verification number
+     * Get unique verification number.
+     *
      * @return int
      */
     public function getVerificationCode()
     {
         $code = rand(100000, 999999);
-            $exists = User::query()->where('verification_code', $code)->first();
-        if ($exists) return $this->getVerificationCode();
+        $exists = User::query()->where('verification_code', $code)->first();
+        if ($exists) {
+            return $this->getVerificationCode();
+        }
 
         return $code;
     }

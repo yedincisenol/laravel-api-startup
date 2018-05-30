@@ -13,6 +13,7 @@ abstract class Request extends FormRequest
      *
      *
      * @param Validator $validator
+     *
      * @return void
      */
     protected function failedValidation(Validator $validator)

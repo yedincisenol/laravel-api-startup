@@ -17,7 +17,7 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $device = $request->user()->device()->create(
+        $device = $request->user()->devices()->create(
             $request->all()
         );
 
@@ -34,7 +34,7 @@ class DeviceController extends Controller
     public function index(Request $request)
     {
         return $this->response->paginator(
-            $request->user()->device()->paginate(10), new UserDeviceTransformer()
+            $request->user()->devices()->paginate(10), new UserDeviceTransformer()
         );
     }
 
@@ -50,7 +50,7 @@ class DeviceController extends Controller
      */
     public function show(Request $request, $token)
     {
-        $device = $request->user()->device()->where('token', $token)->first();
+        $device = $request->user()->devices()->where('token', $token)->first();
 
         if (!isset($device->id)) {
             return $this->response->errorNotFound(trans('exception.device_not_found'));
@@ -73,7 +73,7 @@ class DeviceController extends Controller
      */
     public function destroy(Request $request, $token)
     {
-        $device = $request->user()->device()->where('token', $token)->first();
+        $device = $request->user()->devices()->where('token', $token)->first();
         if (isset($device->id)) {
             $device->delete();
 

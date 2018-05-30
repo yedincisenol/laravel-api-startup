@@ -24,6 +24,6 @@ class ValidationException extends StoreResourceFailedException
             }
         }
 
-        parent::__construct(trans('exception.validation_failed').' '.$errorText, $errors, null, [], 0);
+        parent::__construct(trans('exception.validation_failed').$errorText, $errors, null, [], 0);
     }
 }

@@ -31,7 +31,14 @@ $api->version('v1.0', [
                 $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
             });
 
-        $api->post('register', 'Controller@register');
+        $api->post('email-verify', 'Controller@emailVerify');
+        $api->post('resend-verification', 'Controller@resendEmailVerification');
+        $api->post('reset-password', 'Controller@resetPasswordRequest');
+        $api->post('reset-code-verify', 'Controller@resetCodeVerify');
+        $api->put('update-password', 'Controller@updatePassword');
+
+        $api->get('username', 'Controller@username');
+        $api->post('register', 'RegisterController@email');
         $api->post('notification', 'NotificationController@send');
         $api->group(['middleware' => ['auth:api'], 'prefix' => 'user'], function ($api) {
             $api->get('/', 'UserController@index')->middleware(['admin']);

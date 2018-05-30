@@ -52,6 +52,9 @@ x-tagGroups:
       - Password Update
       - User settings
       - Device
+  - name: Username
+    tags:
+      - Username
   - name: Others
     tags:
       - Notification
@@ -419,6 +422,40 @@ paths:
         - ClientID: []
         - ClientSecret: []
         - UserSecurity: []
+  /username:
+    get:
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - UserSecurity: []
+        - Language: []
+        - Timezone: []
+      summary: Check available
+      tags:
+        - Username
+      parameters:
+        - name: q
+          description: Username
+          required: true
+          in: query
+          type: string
+      responses:
+        '204':
+          description: Ok
+        '400':
+          description: You should 3 letter at least
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+        '409':
+          description: Username in use
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
   "/user/password":
     put:
       tags:

@@ -65,7 +65,6 @@
         ],
         "post-autoload-dump": [
             "php -r \"file_exists('storage/oauth-private.key') || touch('storage/oauth-private.key');\"",
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ]

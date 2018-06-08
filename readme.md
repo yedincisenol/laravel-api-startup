@@ -41,6 +41,8 @@ For start installation please visit Wiki page
 - Documentation for new services
 - `name` validation on `self/update`
 - Send validation errors at `message` property of responses
+- Bitbucket pipelines
+- Docker Compose
 
 ## Contributing
 

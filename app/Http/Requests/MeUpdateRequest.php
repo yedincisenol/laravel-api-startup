@@ -22,7 +22,7 @@ class MeUpdateRequest extends Request
     public function rules()
     {
         return [
-            'email'       => 'required|unique:users,id,'.$this->user()->id,
+            'email'       => 'unique:users,id,'.$this->user()->id,
         ];
     }
 }

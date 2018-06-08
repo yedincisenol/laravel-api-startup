@@ -30,8 +30,8 @@ class NotificationTransformer extends Transformer
             'uri'                   =>  $notification->data['uri'],
             'type'                  =>  @$notification->data['type'],
             'point'                 =>  $notification->data['point'],
-            'left_image_url'        =>  @$notification->data['left_image_url'],
-            'right_image_url'       =>  @$notification->data['right_image_url'],
+            'image_url'             =>  @$notification->data['left_image_url'],
+            'note'                  =>  @$notification->data['note'],
             'read_at'               =>  (string) timezone($notification->read_at),
             'created_at'            =>  (string) timezone($notification->created_at)->toDateTimeString(),
             'created_at_readable'   =>  $this->readable($notification->created_at)
@@ -53,7 +53,7 @@ class NotificationTransformer extends Transformer
             return;
         }
 
-        return $this->item($user, new UserTransformer($this->user));
+        return $this->item($user, new UserTransformer());
     }
 
 }

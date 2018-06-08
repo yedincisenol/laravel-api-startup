@@ -154,8 +154,16 @@ class RegisterController extends Controller
             ->where('provider_user_id', $id)
             ->first();
 
+        $email = $request->get('email');
+
         if (!$userProvider || !$user = User::find($userProvider->user_id)) {
-            $user = $this->createUser($request, $id);
+
+            if ($email && $user = User::query()->where('email', $email)->first()) {
+                return $user;
+            } else {
+                $user = $this->createUser($request, $id);
+            }
+
         }
 
         return $user;

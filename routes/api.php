@@ -29,6 +29,7 @@ $api->version('v1.0', [
                 $api->resource('device', 'DeviceController', ['middleware'   => ['scope:manage-devices']]);
                 $api->get('setting', 'SettingController@index');
                 $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
+                $api->get('connect', 'ConnectController@index');
             });
 
         $api->post('email-verify', 'Controller@emailVerify');

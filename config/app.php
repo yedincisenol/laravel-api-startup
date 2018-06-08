@@ -244,7 +244,6 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
         'OneSignal'    => Berkayk\OneSignal\OneSignalFacade::class,
         'Setting'      => anlutro\LaravelSettings\Facade::class,
-        'UserProvider' => \App\Services\UserProvider\UserProviderFacede::class,
     ],
 
 ];

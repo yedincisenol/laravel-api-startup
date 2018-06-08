@@ -9,12 +9,26 @@ For access Api you need know client credential
 
 For send `POST` or `PUT` default `Content-Type` is `application/x-www-form-urlencoded`
 
-## Rate Limiting
-
 All endpoints protect with [Rate Limiting](https://github.com/dingo/api/wiki/Rate-Limiting). In default one ip send max
 `200` request in `5` minutes. Over the limit, web services return `500` error.
 
 You can view `RateLimit` status in Response headers
+
+## Error handling
+
+In general all requests returns `200`,`201` or `204`. This codes are success responses.
+`422` error code is validation error and other `400` or `500` series returns a `message` parameter.
+When see those codes you can show `message` parameter on secreen.
+
+## User Auth
+
+The api uses oAuth 2.0 standarts. And issued access tokens are long-lived. That means your access tokens never expires. If you see `401` or `500` error with `Unauthenticated.` message, you should logout user.
+
+## Localization
+
+System default timezone is `UTC`, for customize dates and time you can pass `timezone` parameter via `headers`. Like `Europe/Moscow`.
+
+## Rate Limiting
 
 
 ```

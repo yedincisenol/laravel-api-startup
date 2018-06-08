@@ -1,17 +1,17 @@
 version: '2'
 services:
   nginx:
-    image: shippingdocker/nginx:latest
+    build: ./build/nginx
     ports:
      - "80:80"
     volumes:
-     - ./application:/var/www/html
+     - ./:/var/www/html
     networks:
      - appnet
   php:
-    image: shippingdocker/php:latest
+    build: ./build/php
     volumes:
-     - ./application:/var/www/html
+     - ./:/var/www/html
     networks:
      - appnet
   redis:

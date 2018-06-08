@@ -56,13 +56,14 @@
             "php -r \"touch('storage/oauth-private.key');\""
         ],
         "post-root-package-install": [
-            "php -r \"touch('storage/oauth-private.key');\"",
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php -r \"file_exists('storage/oauth-private.key') || touch('storage/oauth-private.key');\"",
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate"
         ],
         "post-autoload-dump": [
+            "php -r \"file_exists('storage/oauth-private.key') || touch('storage/oauth-private.key');\"",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ]

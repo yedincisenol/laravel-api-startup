@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class ConnectController extends Controller
 {
     /**
-     * List of connected providers
+     * List of connected providers.
+     *
      * @param Request $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function index(Request $request)

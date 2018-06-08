@@ -9,10 +9,10 @@ class ProviderTransformer extends Transformer
     public function transform(UserProvider $provider)
     {
         return [
-            'provider'          =>  $provider->provider,
-            'provider_user_id'  =>  $provider->provider_user_id,
-            'access_token'      =>  $provider->access_token,
-            'refresh_token'     =>  $provider->refresh_token
+            'provider'          => $provider->provider,
+            'provider_user_id'  => $provider->provider_user_id,
+            'access_token'      => $provider->access_token,
+            'refresh_token'     => $provider->refresh_token,
         ];
     }
 }

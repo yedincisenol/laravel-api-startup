@@ -3,7 +3,6 @@
 namespace App\Transformers;
 
 use App\User;
-use Carbon\Carbon;
 
 class NotificationTransformer extends Transformer
 {
@@ -17,24 +16,26 @@ class NotificationTransformer extends Transformer
     }
 
     /**
-     * Transform to Notification
+     * Transform to Notification.
+     *
      * @param $notification
+     *
      * @return array
      */
     public function transform($notification)
     {
         return [
-            'id'                    =>  $notification->id,
-            'title'                 =>  @$notification->data['title'],
-            'text'                  =>  $notification->data['text'],
-            'uri'                   =>  $notification->data['uri'],
-            'type'                  =>  @$notification->data['type'],
-            'point'                 =>  $notification->data['point'],
-            'image_url'             =>  @$notification->data['left_image_url'],
-            'note'                  =>  @$notification->data['note'],
-            'read_at'               =>  (string) timezone($notification->read_at),
-            'created_at'            =>  (string) timezone($notification->created_at)->toDateTimeString(),
-            'created_at_readable'   =>  $this->readable($notification->created_at)
+            'id'                    => $notification->id,
+            'title'                 => @$notification->data['title'],
+            'text'                  => $notification->data['text'],
+            'uri'                   => $notification->data['uri'],
+            'type'                  => @$notification->data['type'],
+            'point'                 => $notification->data['point'],
+            'image_url'             => @$notification->data['left_image_url'],
+            'note'                  => @$notification->data['note'],
+            'read_at'               => (string) timezone($notification->read_at),
+            'created_at'            => (string) timezone($notification->created_at)->toDateTimeString(),
+            'created_at_readable'   => $this->readable($notification->created_at),
         ];
     }
 
@@ -42,6 +43,7 @@ class NotificationTransformer extends Transformer
     {
         $time = $time->diffForHumans(null, true, true);
         $time = str_replace([' dakika', ' saniye', ' gün', ' hafta', ' yıl', ' saat'], ['d', 'sn', 'g', 'h', 'y', 's'], (string) $time);
+
         return $time;
     }
 
@@ -55,5 +57,4 @@ class NotificationTransformer extends Transformer
 
         return $this->item($user, new UserTransformer());
     }
-
 }

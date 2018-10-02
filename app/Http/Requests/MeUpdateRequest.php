@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class MeUpdateRequest extends Request
 {
     /**
@@ -22,7 +24,11 @@ class MeUpdateRequest extends Request
     public function rules()
     {
         return [
-            'email'       => 'unique:users,id,'.$this->user()->id,
+            'username'      =>  'nullable|min:3|unique:users,username,' . $this->user()->id,
+            'name' => 'required',
+            'email'         =>  [
+                Rule::unique('users', 'email')->ignore($this->user()->id, 'id')
+            ],
         ];
     }
 }

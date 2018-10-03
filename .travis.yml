@@ -13,7 +13,7 @@ before_install:
   # Now we can install the newer docker-engine which is required for the newer
   # docker-composer we will install next. The messy options are to force it to
   # be non-interactive (normally it asks you a bunch of config questions).
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-ce
 
   # Print out the current docker-compose version. Once this reports 1.6+ then we
   # do not need the following steps.

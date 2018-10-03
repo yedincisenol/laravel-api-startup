@@ -27,9 +27,9 @@ class ConnectRequest extends Request
     public function rules()
     {
         $rules = [
-            'provider'          =>  'required|in:facebook,twitter,linkedin,google',
-            'access_token'      =>  ['required'],
-            'provider_user_id'  =>  'required'
+            'provider'          => 'required|in:facebook,twitter,linkedin,google',
+            'access_token'      => ['required'],
+            'provider_user_id'  => 'required',
         ];
 
         if ($this->get('provider') == 'facebook') {

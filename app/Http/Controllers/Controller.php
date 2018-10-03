@@ -209,6 +209,7 @@ class Controller extends BaseController
      * Verify reset code.
      *
      * @param ResetCodeVerifyRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function resetCodeVerify(ResetCodeVerifyRequest $request)

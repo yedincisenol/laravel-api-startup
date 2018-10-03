@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 class ConnectController extends Controller
 {
     /**
-     * List of connected providers
+     * List of connected providers.
+     *
      * @param Request $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function index(Request $request)
@@ -21,12 +23,13 @@ class ConnectController extends Controller
 
     /**
      * @param ConnectRequest $request
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function store(ConnectRequest $request)
     {
         $provider = $request->user()->providers()->updateOrCreate([
-            'provider'  =>  $request->get('provider')
+            'provider'  => $request->get('provider'),
         ], $request->all());
 
         return $this->response->item($provider, new ProviderTransformer());
@@ -35,6 +38,7 @@ class ConnectController extends Controller
     /**
      * @param ConnectRequest $request
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function update(ConnectRequest $request, $id)
@@ -52,6 +56,7 @@ class ConnectController extends Controller
     /**
      * @param Request $request
      * @param $id
+     *
      * @return \Dingo\Api\Http\Response
      */
     public function destroy(Request $request, $id)

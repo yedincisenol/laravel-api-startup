@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Laravel\Passport\Http\Controllers\AccessTokenController as PassportAccessTokenController;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response as Psr7Response;
 use Exception;
-use Throwable;
-use Illuminate\Http\Response;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Http\Response;
+use Laravel\Passport\Http\Controllers\AccessTokenController as PassportAccessTokenController;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Throwable;
+use Zend\Diactoros\Response as Psr7Response;
 
 class AccessTokenController extends PassportAccessTokenController
 {
     /**
      * Perform the given callback with exception handling.
      *
-     * @param  \Closure  $callback
+     * @param \Closure $callback
+     *
      * @return \Illuminate\Http\Response|\Psr\Http\Message\ResponseInterface
      */
     protected function withErrorHandling($callback)
@@ -26,10 +27,9 @@ class AccessTokenController extends PassportAccessTokenController
         try {
             return $callback();
         } catch (OAuthServerException $e) {
-
             if ($e->getCode() == 6) {
                 response([
-                    'message'   => trans('user.wrong_password')
+                    'message'   => trans('user.wrong_password'),
                 ], 401)->send();
 
                 exit();
@@ -37,7 +37,7 @@ class AccessTokenController extends PassportAccessTokenController
 
             $this->exceptionHandler()->report($e);
 
-            return $e->generateHttpResponse(new Psr7Response);
+            return $e->generateHttpResponse(new Psr7Response());
         } catch (Exception $e) {
             $this->exceptionHandler()->report($e);
 
@@ -62,15 +62,16 @@ class AccessTokenController extends PassportAccessTokenController
     /**
      * Authorize a client to access the user's account.
      *
-     * @param  ServerRequestInterface $request
+     * @param ServerRequestInterface $request
+     *
+     * @throws \League\OAuth2\Server\Exception\OAuthServerException
      *
      * @return \Psr\Http\Message\ResponseInterface
-     * @throws \League\OAuth2\Server\Exception\OAuthServerException
      */
     public function issueToken(ServerRequestInterface $request)
     {
         return $this->withErrorHandling(function () use ($request) {
-            return $this->server->respondToAccessTokenRequest($request, new Psr7Response);
+            return $this->server->respondToAccessTokenRequest($request, new Psr7Response());
         });
     }
 }

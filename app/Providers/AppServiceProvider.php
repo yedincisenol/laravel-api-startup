@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('\\' . \Laravel\Passport\Http\Controllers\AccessTokenController::class, AccessTokenController::class);
+        $this->app->bind('\\'.\Laravel\Passport\Http\Controllers\AccessTokenController::class, AccessTokenController::class);
     }
 }

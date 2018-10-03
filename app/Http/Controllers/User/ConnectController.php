@@ -52,7 +52,7 @@ class ConnectController extends Controller
     /**
      * @param Request $request
      * @param $id
-     * @return \Dingo\Api\Http\Response|void
+     * @return \Dingo\Api\Http\Response
      */
     public function destroy(Request $request, $id)
     {

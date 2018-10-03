@@ -56,15 +56,19 @@ schemes:
 x-logo:
   url: 'https://rebilly.github.io/ReDoc/petstore-logo.png'
 x-tagGroups:
+  - name: Register - Login
+    tags:
+      - Register
+      - Username
+      - Login
   - name: Admin
     tags:
       - User (Admin)
-  - name: User
+  - name: Self
     tags:
-      - Profile
-      - User
+      - Self
       - Password Update
-      - User settings
+      - Connect
       - Device
   - name: Username
     tags:
@@ -73,144 +77,29 @@ x-tagGroups:
     tags:
       - Notification
 paths:
-  "/user":
-    get:
-      tags: 
-        - User (Admin)
-      summary: Get all users (Admin)
-      description: Get all users
-      parameters: 
-        - name: limit
-          required: false
-          in: query
-          description: Pagination Limit
-          type: integer
-        - name: page
-          required: false
-          in: query
-          description: Page number
-          type: integer
-      security:
-        - ClientID: []
-        - ClientSecret: []
-        - AdminSecurity: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: object
-            properties:
-              data:
-                type: array
-                items:
-                  - $ref: '#/definitions/user'
-              meta:
-                $ref: '#/definitions/meta'
-  "/user/:id":
-    get:
-      tags:
-        - User (Admin)
-      summary: Show a user
-      description: Show a user
-      parameters:
-        - name: id
-          description: User id
-          type: integer
-          in: path
-          required: true
-      security:
-        - ClientID: []
-        - ClientSecret: []
-        - AdminSecurity: []
-      responses:
-        200:
-          description: Success
-          schema:
-            type: object
-            properties:
-              data:
-                $ref: '#/definitions/user'
-              meta:
-                $ref: '#/definitions/meta'
-        404:
-          description: Not found
-          schema:
-            $ref: '#/definitions/error'
-    delete:
-      tags:
-        - User (Admin)
-      summary: Delete a user
-      description: Delete a user
-      parameters:
-        - name: id
-          description: User id
-          type: integer
-          in: path
-          required: true
-      security:
-        - ClientID: []
-        - ClientSecret: []
-        - AdminSecurity: []
-      responses:
-        204:
-          description: OK
-        404:
-          description: Not found
-          schema:
-              $ref: '#/definitions/error'
-    put:
-      tags:
-        - User (Admin)
-      summary: Update a user
-      description: Update a user
-      parameters:
-        - name: id
-          description: User id
-          type: integer
-          in: path
-          required: true
-      security:
-        - ClientID: []
-        - ClientSecret: []
-        - AdminSecurity: []
-      responses:
-        200:
-          description: OK
-          schema:
-            type: object
-            properties:
-              data:
-                $ref: '#/definitions/user'
-              meta:
-                $ref: '#/definitions/meta'
-        404:
-          description: Not found
-          schema:
-            $ref: '#/definitions/error'
-
   "/register":
     post:
       consumes:
         - "application/x-www-form-urlencoded"
       tags:
-        - "User"
+        - "Register"
       summary: "Register"
       parameters:
-      - in: formData
-        name: "name"
-        required: true
-        description: "Name"
-        type: string
-      - name: email
-        in: formData
-        required: true
-        description: "Email"
-        type: string
-      - name: password
-        in: formData
-        required: true
-        description: "Password"
-        type: string
+        - in: formData
+          name: "name"
+          required: true
+          description: "Name"
+          type: string
+        - name: email
+          in: formData
+          required: true
+          description: "Email"
+          type: string
+        - name: password
+          in: formData
+          required: true
+          description: "Password"
+          type: string
       security:
         - ClientID: []
         - ClientSecret: []
@@ -221,12 +110,123 @@ paths:
           description: "Email allready use"
           schema:
             $ref: '#/definitions/error'
+  "resend-verification":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+        - "Register"
+      summary: "Re-send verification code"
+      parameters:
+        - in: formData
+          name: "email"
+          required: true
+          description: "Email address for code"
+          type: string
+      security:
+        - ClientID: []
+        - ClientSecret: []
+      responses:
+        404:
+          description: "User not found"
+          schema:
+            $ref: '#/definitions/error'
+        400:
+          description: "User already validated"
+          schema:
+            $ref: '#/definitions/error'
+        201:
+          description: "Ok - Code will send via Email"
+  "reset-password":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+        - "Register"
+      summary: Reset password request
+      parameters:
+        - in: formData
+          name: "email"
+          required: true
+          description: "Email address for code"
+          type: string
+      security:
+        - ClientID: []
+        - ClientSecret: []
+      responses:
+        201:
+          description: "OK"
+  "reset-code-verify":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+        - Register
+      summary: Verify reset code
+      parameters:
+        - in: formData
+          name: "email"
+          required: true
+          description: "Email address for code"
+          type: string
+        - in: formData
+          name: "code"
+          required: true
+          description: "Verify code"
+          type: string
+      security:
+        - ClientID: []
+        - ClientSecret: []
+      responses:
+        400:
+          description: "Verification failed"
+          schema:
+            $ref: '#/definitions/error'
+        204:
+          description: "OK"
+  "update-password":
+    post:
+      consumes:
+        - "application/x-www-form-urlencoded"
+      tags:
+        - Register
+      summary: Update password with reset code
+      parameters:
+        - in: formData
+          name: "email"
+          required: true
+          description: "Email address for code"
+          type: string
+        - in: formData
+          name: "code"
+          required: true
+          description: "Verify code"
+          type: string
+        - name: password
+          in: formData
+          required: true
+          description: "New password"
+          type: string
+      security:
+        - ClientID: []
+        - ClientSecret: []
+      responses:
+        422:
+          description: "Wrong verification code"
+          schema:
+            $ref: '#/definitions/error'
+        404:
+          description: "User not found with this email"
+          schema:
+            $ref: '#/definitions/error'
+        201:
+          description: "OK"
   "/oauth/token":
     post:
       consumes:
         - "application/x-www-form-urlencoded"
       tags:
-      - "User"
+      - "Login"
       summary: "Login"
       description: "Get access token with Password"
       parameters:
@@ -242,7 +242,14 @@ paths:
         type: string
       - in: "formData"
         name: "grant_type"
-        description: "Login grant type: password, refresh_token"
+        description: "Login grant type"
+        enum:
+          - password
+          - refresh_token
+          - facebook
+          - linkedin
+          - twitter
+          - google
         required: true
         type: string
       - in: "formData"
@@ -261,6 +268,21 @@ paths:
         required: true
         default: "*"
         type: string
+      - in: "formData"
+        name: name
+        description: "Name of user (For thirt-party login)"
+        required: false
+        type: string
+      - in: "formData"
+        name: picture_url
+        description: "Picture url of user (For thirt-party login)"
+        type: string
+        required: false
+      - in: "formData"
+        name: email
+        description: "Email of user (for thirt-party login)"
+        type: string
+        required: false
       responses:
         200:
           description: "Success"
@@ -278,7 +300,7 @@ paths:
   "/self/me":
     get:
       tags:
-        - Profile
+        - Self
       summary: Me
       description: Logger users profile
       security:
@@ -299,7 +321,7 @@ paths:
       summary: Update Me
       description: Update logged user
       tags:
-        - Profile
+        - Self
       consumes:
         - "application/x-www-form-urlencoded"
       parameters:
@@ -436,6 +458,260 @@ paths:
         - ClientID: []
         - ClientSecret: []
         - UserSecurity: []
+  "/self/connect":
+    get:
+      tags:
+        - Connect
+      summary: Social media connections
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/connect'
+              meta:
+                $ref: '#/definitions/meta'
+    post:
+      tags:
+        - Connect
+      summary: Add new connection
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: provider
+          type: string
+          enum:
+            - facebook
+            - twitter
+            - linkedin
+            - google
+          required: true
+          description: Provider
+          in: formData
+        - name: access_token
+          type: string
+          required: true
+          description: Access token on provider for user
+          in: formData
+        - name: provider_user_id
+          type: string
+          required: true
+          description: "User id on provider for user"
+          in: formData
+        - name: refresh_token
+          type: string
+          in: formData
+          required: false
+          description: "Refresh token on provider for user"
+        - name: expires_at
+          type: string
+          in: formData
+          required: false
+          description: "Expires datetime. Format: 2018-10-03 13:37"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/connect'
+              meta:
+                $ref: '#/definitions/meta'
+  "/connect/:id":
+    put:
+      tags:
+        - Connect
+      summary: Update connection
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: id
+          type: integer
+          required: true
+          in: path
+          description: "Connection ID"
+        - name: provider
+          type: string
+          enum:
+            - facebook
+            - twitter
+            - linkedin
+            - google
+          required: true
+          description: Provider
+          in: formData
+        - name: access_token
+          type: string
+          required: true
+          description: Access token on provider for user
+          in: formData
+        - name: provider_user_id
+          type: string
+          required: true
+          description: "User id on provider for user"
+          in: formData
+        - name: refresh_token
+          type: string
+          in: formData
+          required: false
+          description: "Refresh token on provider for user"
+        - name: expires_at
+          type: string
+          in: formData
+          required: false
+          description: "Expires datetime. Format: 2018-10-03 13:37"
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/connect'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: "Not found"
+          schema:
+            $ref: '#/definitions/error'
+    delete:
+      tags:
+        - Connect
+      summary: Remove connection
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        204:
+          description: OK
+        404:
+          description: "Not found"
+          schema:
+            $ref: '#/definitions/error'
+  "/user":
+    get:
+      tags:
+        - User (Admin)
+      summary: Get all users (Admin)
+      description: Get all users
+      parameters:
+        - name: limit
+          required: false
+          in: query
+          description: Pagination Limit
+          type: integer
+        - name: page
+          required: false
+          in: query
+          description: Page number
+          type: integer
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+  "/user/:id":
+    get:
+      tags:
+        - User (Admin)
+      summary: Show a user
+      description: Show a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+          required: true
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
+    delete:
+      tags:
+        - User (Admin)
+      summary: Delete a user
+      description: Delete a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+          required: true
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        204:
+          description: OK
+        404:
+          description: Not found
+          schema:
+              $ref: '#/definitions/error'
+    put:
+      tags:
+        - User (Admin)
+      summary: Update a user
+      description: Update a user
+      parameters:
+        - name: id
+          description: User id
+          type: integer
+          in: path
+          required: true
+      security:
+        - ClientID: []
+        - ClientSecret: []
+        - AdminSecurity: []
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: '#/definitions/user'
+              meta:
+                $ref: '#/definitions/meta'
+        404:
+          description: Not found
+          schema:
+            $ref: '#/definitions/error'
   /username:
     get:
       security:
@@ -491,32 +767,6 @@ paths:
             properties:
               data:
                 $ref: '#/definitions/user'
-      security:
-        - ClientID: []
-        - ClientSecret: []
-        - UserSecurity: []
-  "/self/setting":
-    get:
-      tags:
-        - User settings
-      summary: Settings
-      description: Get users settings
-      responses:
-        200:
-          description: OK
-          schema:
-            type: object
-            properties:
-              data:
-                $ref: '#/definitions/setting'
-    post:
-      tags:
-        - User settings
-      summary: Update settings
-      description: Update - create users settings
-      responses:
-        201:
-          description: OK
       security:
         - ClientID: []
         - ClientSecret: []
@@ -617,6 +867,19 @@ definitions:
       device_type:
         type: string
       created_at:
+        type: string
+  connect:
+    type: object
+    properties:
+      id:
+        type: integer
+      provider:
+        type: string
+      provider_user_id:
+        type: integer
+      access_token:
+        type: string
+      refresh_token:
         type: string
   meta:
     type: object

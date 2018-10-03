@@ -194,7 +194,6 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
-        anlutro\LaravelSettings\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
     ],
 

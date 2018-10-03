@@ -3,15 +3,15 @@ services:
   nginx:
     build: ./build/nginx
     ports:
-     - "80:80"
+     - ${DOCKER_NGINX_PORT}
     volumes:
-     - ./:/var/www/html
+     - ./:/var/www/api
     networks:
      - appnet
   php:
     build: ./build/php
     volumes:
-     - ./:/var/www/html
+     - ./:/var/www/api
     networks:
      - appnet
   redis:
@@ -21,10 +21,10 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: api-startup
-      MYSQL_USER: homestead
-      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: ${DOCKER_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
      - data:/var/lib/mysql
     networks:

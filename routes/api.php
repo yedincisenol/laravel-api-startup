@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,9 +26,7 @@ $api->version('v1.0', [
                 $api->put('me', 'MeController@update', ['middleware' => ['scope:edit-user']]);
                 $api->put('password', 'MeController@passwordUpdate', ['middleware' => ['scope:update-password']]);
                 $api->resource('device', 'DeviceController', ['middleware'   => ['scope:manage-devices']]);
-                $api->get('setting', 'SettingController@index');
-                $api->post('setting', 'SettingController@storeOrUpdate', ['middleware' => ['scope:manage-settings']]);
-                $api->get('connect', 'ConnectController@index');
+                $api->get('connect', 'ConnectController@index', ['middleware' => ['scope:manage-connections']]);
             });
 
         $api->post('email-verify', 'Controller@emailVerify');

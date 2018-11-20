@@ -15,4 +15,5 @@ return [
     'wrong_verification_code'           => 'Wrong verification code',
     'reset_password_title'              => ':name password reset',
     'connection_not_found'              => 'Connection not found',
+    'wrong_password'                    => 'Wrong username or password'
 ];

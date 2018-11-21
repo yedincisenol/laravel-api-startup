@@ -38,6 +38,7 @@ For start installation please visit Wiki page
 - Fix `500` response code to `401` on   `Unauthenticated` state
 - Filterable
 - Bitbucket pipelines
+- FileExists Rule
 
 ## Contributing
 

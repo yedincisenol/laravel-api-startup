@@ -31,6 +31,13 @@ services:
      - data:/var/lib/mysql
     networks:
      - appnet
+  newman:
+    build: ./build/newman
+    tty: true
+    volumes:
+      - ./:/var/www/api
+    networks:
+      - appnet
 networks:
   appnet:
     driver: "bridge"

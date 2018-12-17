@@ -13,7 +13,7 @@ class AlterPasswordClientSecret extends Seeder
     {
         Laravel\Passport\Client::query()
             ->where('id', 2)->update([
-                'secret' => 'bXKWFmfsJsQJn9iwDU2K4qEvMAb9uYvqlQqSFRiR'
+                'secret' => 'bXKWFmfsJsQJn9iwDU2K4qEvMAb9uYvqlQqSFRiR',
             ]);
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Rules;
 
-use Storage;
 use Illuminate\Contracts\Validation\Rule;
+use Storage;
 
 class FileExistsRule implements Rule
 {
-
     private $remoteFile = false;
 
     /**
@@ -23,8 +22,9 @@ class FileExistsRule implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)
@@ -36,6 +36,7 @@ class FileExistsRule implements Rule
         if ($this->remoteFile) {
             try {
                 file_get_contents($value);
+
                 return true;
             } catch (\Exception $e) {
             }

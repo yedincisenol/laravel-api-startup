@@ -7,8 +7,9 @@ trait Filterable
     /**
      * Trigger the query builder scope.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $queryString
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $queryString
+     *
      * @return void
      */
     public function scopeFilter($query, $queryString = null)

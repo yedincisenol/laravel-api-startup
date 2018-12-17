@@ -12,11 +12,11 @@ class UsersSeeder extends Seeder
     public function run()
     {
         \App\User::create([
-            'name' => 'Api Startup',
-            'email' => 'admin@apistartup.yedincisenol.com', // Should be change for production
-            'role' => 'admin',
+            'name'      => 'Api Startup',
+            'email'     => 'admin@apistartup.yedincisenol.com', // Should be change for production
+            'role'      => 'admin',
             'is_active' => true,
-            'password' => bcrypt('123456'),
+            'password'  => bcrypt('123456'),
         ]);
     }
 }

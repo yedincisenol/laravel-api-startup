@@ -2,7 +2,6 @@
 
 namespace App\Extensions\Eloquent;
 
-use Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Filter
@@ -53,7 +52,7 @@ class Filter
         'prev',
         'pagination',
         'include[]',
-        'q'
+        'q',
     ];
 
     /**
@@ -66,11 +65,12 @@ class Filter
     /**
      * Create a new filter instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $queryString
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string                                $queryString
+     *
      * @return void
      */
-    public function __construct($model, & $query)
+    public function __construct($model, &$query)
     {
         $this->model = $model;
         $this->query = $query;
@@ -86,7 +86,7 @@ class Filter
         $this->generate(
             explode('&', urldecode(
                 rawurldecode(
-                    $queryString ?: $_SERVER["QUERY_STRING"]
+                    $queryString ?: $_SERVER['QUERY_STRING']
                 )
             ))
         );
@@ -95,7 +95,8 @@ class Filter
     /**
      * Generate query via parsed filters.
      *
-     * @param  array  $args
+     * @param array $args
+     *
      * @var array
      */
     private function generate(array $args)
@@ -114,7 +115,7 @@ class Filter
                 $this->handle([
                     'key'      => $key,
                     'operator' => $operator,
-                    'value'    => $this->normalize($value)
+                    'value'    => $this->normalize($value),
                 ]);
             }
         }
@@ -123,7 +124,8 @@ class Filter
     /**
      * Normalizing the type value.
      *
-     * @param  string  $value
+     * @param string $value
+     *
      * @return mixed
      */
     private function normalize($value)
@@ -138,7 +140,7 @@ class Filter
                 break;
 
             case 'null':
-                return null;
+                return;
                 break;
         }
 
@@ -148,8 +150,9 @@ class Filter
     /**
      * Determine the field filterable or not.
      *
-     * @param  string  $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     private function isFilterable($key)
     {
@@ -165,13 +168,13 @@ class Filter
     {
         // call this instance method
         if (in_array($param['key'], $this->methods)) {
-            $this->{camel_case('filter_'. $param['key'])}($param);
+            $this->{camel_case('filter_'.$param['key'])}($param);
         }
         // call the model's method.
         // if you need special filter maybe use this example.
         // Eg, create the filterByDistance method and use distance in query.
-        elseif (method_exists($this->model, camel_case('filterBy_'. $param['key']))) {
-            $this->model->{camel_case('filterBy_'. $param['key'])}($this->query, $param['value']);
+        elseif (method_exists($this->model, camel_case('filterBy_'.$param['key']))) {
+            $this->model->{camel_case('filterBy_'.$param['key'])}($this->query, $param['value']);
         }
         // filter query if the field is filterable
         else {
@@ -182,8 +185,7 @@ class Filter
                     } else {
                         $this->query->whereNull($param['key']);
                     }
-                }
-                else {
+                } else {
                     if (preg_match('/\*/', $param['value'])) {
                         $param['operator'] = 'like';
                         $param['value'] = str_replace('*', '%', $param['value']);
@@ -198,7 +200,8 @@ class Filter
     /**
      * The predefined "with_trashed" method.
      *
-     * @param  array  $param
+     * @param array $param
+     *
      * @return void
      */
     private function filterWithTrashed(array $param)
@@ -211,7 +214,8 @@ class Filter
     /**
      * The predefined "limit" method.
      *
-     * @param  array  $param
+     * @param array $param
+     *
      * @return void
      */
     private function filterLimit(array $param)
@@ -224,7 +228,8 @@ class Filter
     /**
      * The predefined "skip" method.
      *
-     * @param  array  $param
+     * @param array $param
+     *
      * @return void
      */
     private function filterSkip(array $param)
@@ -237,7 +242,8 @@ class Filter
     /**
      * The predefined "sort" method.
      *
-     * @param  array  $param
+     * @param array $param
+     *
      * @return void
      */
     private function filterSort(array $param)
@@ -263,7 +269,8 @@ class Filter
     /**
      * The predefined "include" method.
      *
-     * @param  array  $param
+     * @param array $param
+     *
      * @return void
      */
     private function filterInclude(array $param)

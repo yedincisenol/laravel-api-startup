@@ -22,5 +22,7 @@ RUN apt-get install -y curl zip unzip git software-properties-common \
 ADD php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 ADD www.conf /etc/php/7.2/fpm/pool.d/www.conf
 
+WORKDIR /var/www/api
+
 EXPOSE 9000
 CMD ["php-fpm7.2"]

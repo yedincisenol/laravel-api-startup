@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    machine: 
+      enabled: true
+    steps:
+      - checkout
+      - run:
+         name: Setup
+         command: cp .env.docker .env
+      - run:
+         name: Build docker-compose containers
+         command: |
+           docker-compose build
+      - run:
+         name: Up containers
+         command: docker-compose up -d
+      - run:
+         name: Migrate php
+         command: docker-compose exec php bash -c  "composer install && php artisan migrate:refresh --seed && php artisan passport:install --force"
+      - run:
+         name: Alter Client Secret
+         command: docker-compose exec php bash -c " php artisan db:seed --class=AlterPasswordClientSecret"
+      - run:
+         name: Storage permissions
+         command: docker-compose exec php bash -c "chmod 777 storage -R"
+      - run:
+         name: Run Tests
+         command: docker-compose run newman newman run  hhttps://www.getpostman.com/collections/9622821cf5caf03736c6 -e postman_environment.json

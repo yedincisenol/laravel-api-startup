@@ -7,7 +7,9 @@ services:
     volumes:
      - ./:/var/www/api
     networks:
-     - appnet
+      appnet:
+        aliases:
+         - apistartup
   php:
     build: ./build/php
     volumes:

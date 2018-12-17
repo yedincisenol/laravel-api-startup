@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->response->paginator(User::paginate($request->get('limit')), new UserTransformer());
+        return $this->response->paginator(User::filter()->paginate($request->get('limit')), new UserTransformer());
     }
 
     /**

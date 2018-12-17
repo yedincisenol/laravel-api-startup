@@ -26,4 +26,4 @@ jobs:
          command: docker-compose exec php bash -c "chmod 777 storage -R"
       - run:
          name: Run Tests
-         command: docker-compose run newman newman run  hhttps://www.getpostman.com/collections/9622821cf5caf03736c6 -e postman_environment.json
+         command: docker-compose run newman newman run  https://www.getpostman.com/collections/3fa92bb5e0eec30072a9 -e postman_environment.json

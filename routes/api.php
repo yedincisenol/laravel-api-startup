@@ -26,7 +26,7 @@ $api->version('v1.0', [
                 $api->put('me', 'MeController@update', ['middleware' => ['scope:edit-user']]);
                 $api->put('password', 'MeController@passwordUpdate', ['middleware' => ['scope:update-password']]);
                 $api->resource('device', 'DeviceController', ['middleware'   => ['scope:manage-devices']]);
-                $api->get('connect', 'ConnectController@index', ['middleware' => ['scope:manage-connections']]);
+                $api->resource('connect', 'ConnectController', ['middleware' => ['scope:manage-connections']]);
             });
 
         $api->post('email-verify', 'Controller@emailVerify');

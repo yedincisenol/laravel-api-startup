@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Extensions\Eloquent\Filterable;
 use App\Models\UserDevice;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use yedincisenol\UserProvider\Models\UserProvider;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, Filterable;
 
     /**
      * The attributes that are mass assignable.

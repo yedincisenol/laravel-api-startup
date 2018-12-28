@@ -19,8 +19,10 @@ before_install:
 
   - cp .env.docker .env
   - docker-compose up -d
-  - docker-compose exec php bash -c "cd /var/www/api && composer install"
-  - docker-compose exec php bash -c "cd /var/www/api && php artisan migrate && php artisan passport:install --force"
-
 script:
+  - docker-compose exec php bash -c "composer install && php artisan migrate:refresh --seed && php artisan passport:install --force"
+  - docker-compose exec php bash -c "php artisan db:seed --class=AlterPasswordClientSecret"
+  - docker-compose exec php bash -c "chmod 777 storage -R"
+  - docker-compose run --rm newman newman run  https://www.getpostman.com/collections/3fa92bb5e0eec30072a9 -e postman_environment.json
   - docker-compose exec php bash -c "cd /var/www/api && vendor/bin/phpunit"
+  - docker-compose exec php bash -c "cat storage/logs/laravel.log"

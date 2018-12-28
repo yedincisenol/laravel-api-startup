@@ -27,3 +27,6 @@ jobs:
       - run:
          name: Run Tests
          command: docker-compose run --rm newman newman run  https://www.getpostman.com/collections/3fa92bb5e0eec30072a9 -e postman_environment.json
+      - run:
+         name: Check logs
+         command: docker-compose exec php bash -c "cat storage/logs/laravel.log"

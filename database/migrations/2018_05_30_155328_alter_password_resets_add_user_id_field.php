@@ -27,6 +27,7 @@ class AlterPasswordResetsAddUserIdField extends Migration
     public function down()
     {
         Schema::table('password_resets', function (Blueprint $table) {
+            $table->dropForeign('password_resets_user_id_foreign');
             $table->dropColumn('user_id');
         });
     }
